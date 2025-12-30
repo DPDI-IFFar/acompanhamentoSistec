@@ -39,8 +39,7 @@ O painel disponibiliza a simulação dos seguintes indicadores institucionais:
 Esses indicadores funcionam como uma prévia analítica, auxiliando as unidades a identificar possíveis ajustes necessários antes do período oficial de validação da PNP, usualmente em fevereiro de cada ano.
 
 > ⚠️ **Observação**  
-> Os cálculos seguem as regras vigentes da PNP, mas são apenas prévias, visto que os dados podem ser alterados durante o ciclo da PNP. 
-> Portanto, não substituem os resultados oficiais publicados pela plataforma.
+> Os cálculos seguem as regras vigentes da PNP, mas são apenas prévias, visto que os dados podem ser alterados durante o ciclo da PNP. Portanto, não substituem os resultados oficiais publicados pela plataforma.
 
 ---
 
