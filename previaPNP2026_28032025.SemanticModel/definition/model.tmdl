@@ -1,0 +1,60 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup 'Transformar Arquivo de ciclos'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'Transformar Arquivo de ciclos\Consultas Auxiliares'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'Transformar Arquivo de matriculas'
+
+	annotation PBI_QueryGroupOrder = 2
+
+queryGroup 'Transformar Arquivo de matriculas\Consultas Auxiliares'
+
+	annotation PBI_QueryGroupOrder = 0
+
+annotation PBI_QueryOrder = ["ciclos","Arquivo de Amostra","Parâmetro1","Transformar o Arquivo de Exemplo","Transformar Arquivo","matriculas","Arquivo de Amostra (2)","Parâmetro2","Transformar o Arquivo de Exemplo (2)","Transformar Arquivo (2)","dimCurso","fec_fech","dimCiclo","dimCampus","dimEstudante","fMatriculas","Medidas","dCalendario","fMatriculasEficienciaAcademica","correcaoBaseadaPNP","microdados_PNP_matriculas_IFFarroupilha_filtrado","dadosIFFAr_enviadosPNP2024"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table dimCurso
+ref table dimCiclo
+ref table dimCampus
+ref table dimEstudante
+ref table DateTableTemplate_e523b481-967e-435d-b2b7-0c89a91c95f3
+ref table LocalDateTable_43d78e67-cda7-4574-9a01-ed8d432c8983
+ref table fMatriculas
+ref table LocalDateTable_a7abcf61-e04e-45f0-9ea9-ef9eabefe373
+ref table Medidas
+ref table dCalendario
+ref table LocalDateTable_4734c1d9-36a2-48b9-8ea1-d3f3ea4904d2
+ref table LocalDateTable_fbdcf5ea-5c40-4bf0-a88c-21a8cc4be3e8
+ref table _CategoriasMatriculas
+ref table TipoVisualizacao
+ref table fMatriculasEficienciaAcademica
+ref table LocalDateTable_d893cee7-7496-4d05-a143-aa597970c949
+ref table LocalDateTable_c136c8ce-7ce9-405e-be6a-007c027b8608
+ref table LocalDateTable_c34a18ed-aeea-480c-974c-0fbb4cc6af0b
+ref table correcaoBaseadaPNP
+ref table LocalDateTable_670b88d2-550e-4f6f-84da-cc48809fed60
+ref table LocalDateTable_19f5805c-952a-46b4-b340-d39defdcbe92
+ref table microdados_PNP_matriculas_IFFarroupilha_filtrado
+ref table LocalDateTable_342596e2-f9bd-4bf2-b2ac-151c1b8f5489
+ref table LocalDateTable_ecc737b4-8e17-40c6-a054-1b9d5ec20f53
+ref table LocalDateTable_428f8302-9703-4d89-be41-646fd7f82908
+ref table dadosIFFAr_enviadosPNP2024
+ref table LocalDateTable_5c5ad22a-cdf0-49aa-8454-612db3fd6248
+
+ref cultureInfo pt-BR
+

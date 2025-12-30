@@ -1,0 +1,53 @@
+# ===============================
+# Power BI Project (PBIP)
+# ===============================
+
+# Cache e estado local do Power BI
+**/.pbi/
+**/.pbi.workspace/
+**/.pbi/localSettings.json
+**/.pbi/cache.
+
+#Power BI Desktop
+**/*.pbix
+
+# Dados locais (datasets, extratos, exports)
+data/
+
+# Arquivos temporários
+*.tmp
+*.bak
+*.log
+*.dmp
+
+# Auto recovery
+**/AutoRecover/*
+**/Recovery/*
+
+# ===============================
+# Build / IDE
+# ===============================
+
+# Visual Studio / VS Code
+.vs/
+**/.vs/
+**/bin/
+**/obj/
+
+# ===============================
+# Sistema Operacional
+# ===============================
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# ===============================
+# Git
+# ===============================
+*.orig
+*.lock

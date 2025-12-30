@@ -1,0 +1,146 @@
+table fMatriculasEficienciaAcademica
+	lineageTag: d11f74bd-89d3-4f7c-819e-9b266599d5e4
+
+	column NU_CPF
+		dataType: string
+		lineageTag: 5421e667-d994-46aa-b005-f5b713e31506
+		summarizeBy: none
+		sourceColumn: NU_CPF
+
+		annotation SummarizationSetBy = Automatic
+
+	column CO_MATRICULA
+		dataType: string
+		lineageTag: 3f9f91f0-6cb0-48fa-90f8-77f2b8d63d34
+		summarizeBy: none
+		sourceColumn: CO_MATRICULA
+
+		annotation SummarizationSetBy = Automatic
+
+	column CO_CICLO_MATRICULA
+		dataType: string
+		lineageTag: e491f8ca-3318-4700-956b-f35d0843b04c
+		summarizeBy: none
+		sourceColumn: CO_CICLO_MATRICULA
+
+		annotation SummarizationSetBy = Automatic
+
+	column DT_DATA_INICIO
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c717472f-92b0-41e6-aee7-daffe6b4eb32
+		summarizeBy: none
+		sourceColumn: DT_DATA_INICIO
+
+		variation Variation
+			isDefault
+			relationship: aa258650-4d9a-4928-a5c4-7cb4ee0abd83
+			defaultHierarchy: LocalDateTable_d893cee7-7496-4d05-a143-aa597970c949.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column DT_DATA_FIM_PREVISTO
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 439dfd5d-bd89-4029-ac31-a30d65781c74
+		summarizeBy: none
+		sourceColumn: DT_DATA_FIM_PREVISTO
+
+		variation Variation
+			isDefault
+			relationship: 155176f4-3819-4aa9-8874-b90b27a45e89
+			defaultHierarchy: LocalDateTable_c136c8ce-7ce9-405e-be6a-007c027b8608.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column NO_STATUS_MATRICULA
+		dataType: string
+		lineageTag: 939861c6-5bef-40f7-85ce-7017f8689f98
+		summarizeBy: none
+		sourceColumn: NO_STATUS_MATRICULA
+
+		annotation SummarizationSetBy = Automatic
+
+	column MES_DE_OCORRENCIA
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0c8185a4-64f3-45aa-bf4b-a01171acb143
+		summarizeBy: none
+		sourceColumn: MES_DE_OCORRENCIA
+
+		variation Variation
+			isDefault
+			relationship: a8ca2c73-73b6-4811-a486-62dcf1e2a838
+			defaultHierarchy: LocalDateTable_c34a18ed-aeea-480c-974c-0fbb4cc6af0b.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column MatriculaAtendida
+		dataType: string
+		lineageTag: 3b5f8355-c9c3-4472-9ceb-95b35fb014c3
+		summarizeBy: none
+		sourceColumn: MatriculaAtendida
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'correcaoBaseadaPNP.Correcao_Status'
+		dataType: string
+		lineageTag: e5928bbe-5373-4b6a-a95a-81924621918e
+		summarizeBy: none
+		sourceColumn: correcaoBaseadaPNP.Correcao_Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'correcaoBaseadaPNP.Correcao_MesOcorrencia'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: cf419c58-a1af-44d1-a17e-452533d9ba2b
+		summarizeBy: none
+		sourceColumn: correcaoBaseadaPNP.Correcao_MesOcorrencia
+
+		variation Variation
+			isDefault
+			relationship: d09e6d3d-faf4-467b-8110-e8fdb7dd7f3a
+			defaultHierarchy: LocalDateTable_19f5805c-952a-46b4-b340-d39defdcbe92.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column NO_STATUS_MATRICULA2
+		dataType: string
+		lineageTag: 30981a18-2f2f-45d1-b8a2-b8c9a83d63c9
+		summarizeBy: none
+		sourceColumn: NO_STATUS_MATRICULA2
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fMatriculasEficienciaAcademica = m
+		mode: import
+		source =
+				let
+				    Fonte = Folder.Files("H:\Drives compartilhados\PI IFFar\SISTEC\Extração de Dados SISTEC\Extração 2025\11novembro\1912\matriculas"),
+				    #"Arquivos Ocultos Filtrados1" = Table.SelectRows(Fonte, each [Attributes]?[Hidden]? <> true),
+				    #"Invocar Função Personalizada1" = Table.AddColumn(#"Arquivos Ocultos Filtrados1", "Transformar Arquivo (2)", each #"Transformar Arquivo (2)"([Content])),
+				    #"Colunas Renomeadas1" = Table.RenameColumns(#"Invocar Função Personalizada1", {"Name", "Nome da Origem"}),
+				    #"Outras Colunas Removidas1" = Table.SelectColumns(#"Colunas Renomeadas1", {"Nome da Origem", "Transformar Arquivo (2)"}),
+				    #"Coluna de Tabela Expandida1" = Table.ExpandTableColumn(#"Outras Colunas Removidas1", "Transformar Arquivo (2)", Table.ColumnNames(#"Transformar Arquivo (2)"(#"Arquivo de Amostra (2)"))),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(#"Coluna de Tabela Expandida1",{"NU_CPF", "CO_MATRICULA", "CO_CICLO_MATRICULA", "DT_DATA_INICIO", "DT_DATA_FIM_PREVISTO", "NO_STATUS_MATRICULA", "MES_DE_OCORRENCIA"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Outras Colunas Removidas",{{"MES_DE_OCORRENCIA", type date}}),
+				    #"Coluna Condicional Adicionada" = Table.AddColumn(#"Tipo Alterado", "MatriculaAtendida", each if Text.Contains([DT_DATA_INICIO], "2024") then "Sim" else if [NO_STATUS_MATRICULA] = "EM_CURSO" then "Sim" else if [MES_DE_OCORRENCIA] >= #date(2024, 1, 1) then "Sim" else "Nao"),
+				    #"Tipo Alterado2" = Table.TransformColumnTypes(#"Coluna Condicional Adicionada",{{"DT_DATA_FIM_PREVISTO", type datetime}}),
+				    #"Linhas Filtradas" = Table.SelectRows(#"Tipo Alterado2", each [DT_DATA_FIM_PREVISTO] >= #datetime(2024, 1, 1, 0, 0, 0) and [DT_DATA_FIM_PREVISTO] <= #datetime(2025, 1, 1, 0, 0, 0)),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Linhas Filtradas",{{"DT_DATA_INICIO", type datetime}}),
+				    #"Consultas Mescladas" = Table.NestedJoin(#"Tipo Alterado1", {"CO_MATRICULA"}, correcaoBaseadaPNP, {"CO_MATRICULA"}, "correcaoBaseadaPNP", JoinKind.LeftOuter),
+				    #"correcaoBaseadaPNP Expandido" = Table.ExpandTableColumn(#"Consultas Mescladas", "correcaoBaseadaPNP", {"Correcao_Status", "Correcao_MesOcorrencia"}, {"correcaoBaseadaPNP.Correcao_Status", "correcaoBaseadaPNP.Correcao_MesOcorrencia"}),
+				    #"Coluna Condicional Adicionada1" = Table.AddColumn(#"correcaoBaseadaPNP Expandido", "NO_STATUS_MATRICULA2", each if [correcaoBaseadaPNP.Correcao_Status] = null then [NO_STATUS_MATRICULA] else if [NO_STATUS_MATRICULA] <> [correcaoBaseadaPNP.Correcao_Status] then [correcaoBaseadaPNP.Correcao_Status] else [NO_STATUS_MATRICULA]),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Coluna Condicional Adicionada1","REPROVADO","DESLIGADO",Replacer.ReplaceText,{"NO_STATUS_MATRICULA2"})
+				in
+				    #"Valor Substituído"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

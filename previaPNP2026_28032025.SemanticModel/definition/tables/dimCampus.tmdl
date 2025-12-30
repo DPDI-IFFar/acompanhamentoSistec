@@ -1,0 +1,65 @@
+table dimCampus
+	lineageTag: 3686ff3f-4082-4756-8eb1-aa965152b5b5
+
+	column CO_UNIDADE
+		dataType: string
+		lineageTag: b6537596-cd25-4239-9b0d-25f35a72f022
+		summarizeBy: none
+		sourceColumn: CO_UNIDADE
+
+		annotation SummarizationSetBy = Automatic
+
+	column NO_UNIDADE
+		dataType: string
+		lineageTag: ed9134a6-ee97-4e0d-bd0d-a1d781c7f112
+		summarizeBy: none
+		sourceColumn: NO_UNIDADE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PAÍS
+		dataType: string
+		lineageTag: b140dcb4-f47f-4d7e-af29-c2bba9b1d37a
+		summarizeBy: none
+		sourceColumn: PAÍS
+
+		annotation SummarizationSetBy = Automatic
+
+	column ESTADO
+		dataType: string
+		lineageTag: 0879ae31-ae63-4376-b873-a4d58605c34d
+		summarizeBy: none
+		sourceColumn: ESTADO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CIDADE
+		dataType: string
+		lineageTag: 4618dd46-7e68-4ec7-a99b-96684c130848
+		summarizeBy: none
+		sourceColumn: CIDADE
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dimCampus = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("H:\Drives compartilhados\PI IFFar\SISTEC\Extração de Dados SISTEC\dashboard_SISTEC\previaPNP2025\unidade.xlsx"), null, true),
+				    Plan1_Sheet = Fonte{[Item="Plan1",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Plan1_Sheet, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"CO_UNIDADE", type text}}),
+				    #"Colocar Cada Palavra Em Maiúscula" = Table.TransformColumns(#"Tipo Alterado",{{"NO_UNIDADE", Text.Proper, type text}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Colocar Cada Palavra Em Maiúscula","Campus Júlio De Castilhos","Campus Júlio de Castilhos",Replacer.ReplaceText,{"NO_UNIDADE"}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Valor Substituído","Campus São Vicente Do Sul","Campus São Vicente do Sul",Replacer.ReplaceText,{"NO_UNIDADE"}),
+				    #"Colocar Cada Palavra Em Maiúscula1" = Table.TransformColumns(#"Valor Substituído1",{{"CIDADE", Text.Proper, type text}}),
+				    #"Valor Substituído2" = Table.ReplaceValue(#"Colocar Cada Palavra Em Maiúscula1"," De "," de ",Replacer.ReplaceText,{"CIDADE"}),
+				    #"Valor Substituído3" = Table.ReplaceValue(#"Valor Substituído2","Santa Rosa, Rs, Brasil","Santa Rosa",Replacer.ReplaceText,{"CIDADE"}),
+				    #"Valor Substituído4" = Table.ReplaceValue(#"Valor Substituído3","São Vicente Do Sul","São Vicente do Sul",Replacer.ReplaceText,{"CIDADE"})
+				in
+				    #"Valor Substituído4"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

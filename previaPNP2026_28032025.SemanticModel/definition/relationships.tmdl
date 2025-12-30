@@ -1,0 +1,95 @@
+relationship 1d0c5a48-ae14-f8ad-9f17-d2800b5a9aed
+	fromColumn: dimCurso.'CÓDIGO UNIDADE DE ENSINO'
+	toColumn: dimCampus.CO_UNIDADE
+
+relationship AutoDetected_c8db60d5-fa54-49ef-8ac2-9e851e68240d
+	fromColumn: dimCiclo.CHAVE_CURSO
+	toColumn: dimCurso.CHAVE_CURSO
+
+relationship b5f55f87-6e49-4a36-8c36-858a8b8947da
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dimEstudante.DT_DATA_NASCIMENTO
+	toColumn: LocalDateTable_43d78e67-cda7-4574-9a01-ed8d432c8983.Date
+
+relationship 5b8236c5-7e89-4586-b0cd-e4ee6a82285a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fMatriculas.MES_DE_OCORRENCIA
+	toColumn: LocalDateTable_a7abcf61-e04e-45f0-9ea9-ef9eabefe373.Date
+
+relationship 54a0d5ec-e91e-a97d-0065-3dff15f4927c
+	fromColumn: fMatriculas.NU_CPF
+	toColumn: dimEstudante.NU_CPF
+
+relationship 8a288fef-5c57-0384-17de-21c29cbdfda6
+	fromColumn: fMatriculas.CO_CICLO_MATRICULA
+	toColumn: dimCiclo.'CÓDIGO CICLO DE MATRÍCULA'
+
+relationship 87542aec-4e33-4244-aacd-4b8ae4ed5646
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dimCiclo.'DATA INÍCIO DO CURSO'
+	toColumn: LocalDateTable_4734c1d9-36a2-48b9-8ea1-d3f3ea4904d2.Date
+
+relationship e1edf9e9-6c8e-4417-9832-cbaeb3d26cf5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dimCiclo.'DATA FIM PREVISTO DO CURSO'
+	toColumn: LocalDateTable_fbdcf5ea-5c40-4bf0-a88c-21a8cc4be3e8.Date
+
+relationship aa258650-4d9a-4928-a5c4-7cb4ee0abd83
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fMatriculasEficienciaAcademica.DT_DATA_INICIO
+	toColumn: LocalDateTable_d893cee7-7496-4d05-a143-aa597970c949.Date
+
+relationship 155176f4-3819-4aa9-8874-b90b27a45e89
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fMatriculasEficienciaAcademica.DT_DATA_FIM_PREVISTO
+	toColumn: LocalDateTable_c136c8ce-7ce9-405e-be6a-007c027b8608.Date
+
+relationship a8ca2c73-73b6-4811-a486-62dcf1e2a838
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fMatriculasEficienciaAcademica.MES_DE_OCORRENCIA
+	toColumn: LocalDateTable_c34a18ed-aeea-480c-974c-0fbb4cc6af0b.Date
+
+relationship AutoDetected_bc3e1b68-74c4-4249-a453-3a4835003631
+	fromColumn: fMatriculasEficienciaAcademica.NU_CPF
+	toColumn: dimEstudante.NU_CPF
+
+relationship c0c99c48-1e44-ee5f-437c-bf6c82413db3
+	fromColumn: fMatriculasEficienciaAcademica.CO_CICLO_MATRICULA
+	toColumn: dimCiclo.'CÓDIGO CICLO DE MATRÍCULA'
+
+relationship 4425924b-c81b-41e8-b102-b6f9cd3a27dc
+	joinOnDateBehavior: datePartOnly
+	fromColumn: correcaoBaseadaPNP.Correcao_MesOcorrencia
+	toColumn: LocalDateTable_670b88d2-550e-4f6f-84da-cc48809fed60.Date
+
+relationship d09e6d3d-faf4-467b-8110-e8fdb7dd7f3a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fMatriculasEficienciaAcademica.'correcaoBaseadaPNP.Correcao_MesOcorrencia'
+	toColumn: LocalDateTable_19f5805c-952a-46b4-b340-d39defdcbe92.Date
+
+relationship 0c88cc90-cfb8-4047-b249-b3ea15b8c3bd
+	joinOnDateBehavior: datePartOnly
+	fromColumn: microdados_PNP_matriculas_IFFarroupilha_filtrado.'Mês De Ocorrência da Situação'
+	toColumn: LocalDateTable_342596e2-f9bd-4bf2-b2ac-151c1b8f5489.Date
+
+relationship 938234e0-b835-4094-8803-c176b7c4906d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fMatriculas.'microdados_PNP_matriculas_IFFarroupilha_filtrado.Mês De Ocorrência da Situação'
+	toColumn: LocalDateTable_ecc737b4-8e17-40c6-a054-1b9d5ec20f53.Date
+
+relationship 3b9da14c-9591-4c9c-bf13-d911e027cfe5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fMatriculas.DT_DATA_INICIO
+	toColumn: LocalDateTable_428f8302-9703-4d89-be41-646fd7f82908.Date
+
+relationship 0565efa8-f6ba-4338-9064-939197ccf761
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fMatriculas.'dadosIFFAr_enviadosPNP2024.Mês De Ocorrência da Situação'
+	toColumn: LocalDateTable_5c5ad22a-cdf0-49aa-8454-612db3fd6248.Date
+
+relationship AutoDetected_be856d96-e606-4e9a-8716-e8fd5c1b16b3
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: dadosIFFAr_enviadosPNP2024.'Código da Matricula'
+	toColumn: microdados_PNP_matriculas_IFFarroupilha_filtrado.'Código da Matricula'
+

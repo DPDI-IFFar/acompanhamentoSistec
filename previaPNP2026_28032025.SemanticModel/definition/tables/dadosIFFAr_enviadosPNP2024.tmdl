@@ -1,0 +1,576 @@
+table dadosIFFAr_enviadosPNP2024
+	lineageTag: 4aa7a42c-179e-40c4-b781-2c66b80d4653
+
+	column 'Carga Horaria'
+		dataType: string
+		lineageTag: d6fd4053-62bb-4b3b-a046-a08ce984badd
+		summarizeBy: none
+		sourceColumn: Carga Horaria
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Carga Horaria Mínima'
+		dataType: string
+		lineageTag: 5d90b9a0-f329-4721-a2dc-28e807e7318b
+		summarizeBy: none
+		sourceColumn: Carga Horaria Mínima
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Categoria da Situação'
+		dataType: string
+		lineageTag: 4d297574-4843-4926-9996-a86de634356e
+		summarizeBy: none
+		sourceColumn: Categoria da Situação
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Co Inst'
+		dataType: string
+		lineageTag: 528e5ccb-9acf-44f7-a2d0-0a0e18985816
+		summarizeBy: none
+		sourceColumn: Co Inst
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cod Unidade'
+		dataType: string
+		lineageTag: 2f6bf59f-12e1-439e-b662-c9799f45bd5c
+		summarizeBy: none
+		sourceColumn: Cod Unidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cor / Raça'
+		dataType: string
+		lineageTag: eba06708-8d3f-4d12-bdf9-2b1b74fa6470
+		summarizeBy: none
+		sourceColumn: Cor / Raça
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Código da Matricula'
+		dataType: string
+		lineageTag: dec3f0dc-dae2-42af-b684-b3bf98794537
+		summarizeBy: none
+		sourceColumn: Código da Matricula
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Código da Unidade de Ensino - SISTEC'
+		dataType: string
+		lineageTag: 85640d87-2430-470c-849b-e8dcf3e25fc5
+		summarizeBy: none
+		sourceColumn: Código da Unidade de Ensino - SISTEC
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Código do Ciclo Matricula'
+		dataType: string
+		lineageTag: 736b2d7b-d9b8-4cf9-b290-42f192f98dea
+		summarizeBy: none
+		sourceColumn: Código do Ciclo Matricula
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Código do Município com DV'
+		dataType: string
+		lineageTag: 13a834c1-6594-4183-85f8-9b325dbf59cd
+		summarizeBy: none
+		sourceColumn: Código do Município com DV
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data de Fim Previsto do Ciclo'
+		dataType: string
+		lineageTag: f773d8a4-80d6-4f37-80b2-d93d7ffd3be3
+		summarizeBy: none
+		sourceColumn: Data de Fim Previsto do Ciclo
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data de Inicio do Ciclo'
+		dataType: string
+		lineageTag: 1e55df88-286b-4787-b727-c58671c6f33e
+		summarizeBy: none
+		sourceColumn: Data de Inicio do Ciclo
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data de Ocorrencia da Matricula'
+		dataType: string
+		lineageTag: 01952c30-efa1-400b-a25d-24f6c60a5b7a
+		summarizeBy: none
+		sourceColumn: Data de Ocorrencia da Matricula
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Eixo Tecnológico'
+		dataType: string
+		lineageTag: 4d817ad2-c5f2-47e4-b3d8-a73086238669
+		summarizeBy: none
+		sourceColumn: Eixo Tecnológico
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Faixa Etária'
+		dataType: string
+		lineageTag: 1b7fd543-b522-4212-84bb-cb013e23416c
+		summarizeBy: none
+		sourceColumn: Faixa Etária
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fator Esforço Curso'
+		dataType: string
+		lineageTag: 31f83cf3-bd14-40d8-9393-534f884d3470
+		summarizeBy: none
+		sourceColumn: Fator Esforço Curso
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fonte de Financiamento'
+		dataType: string
+		lineageTag: 8d9d5194-7120-4c37-a23a-1f9931d8c3a1
+		summarizeBy: none
+		sourceColumn: Fonte de Financiamento
+
+		annotation SummarizationSetBy = Automatic
+
+	column Idade
+		dataType: string
+		lineageTag: 8c0c56aa-763c-4d60-ac7d-63c59f3d2f35
+		summarizeBy: none
+		sourceColumn: Idade
+
+		annotation SummarizationSetBy = Automatic
+
+	column Instituição
+		dataType: string
+		lineageTag: 006264c8-16e9-49d0-9a51-5471c1ec9f2b
+		summarizeBy: none
+		sourceColumn: Instituição
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Matrículas Atendida'
+		dataType: string
+		lineageTag: 3ec756e4-2fea-43f7-8e79-c36496124fb8
+		summarizeBy: none
+		sourceColumn: Matrículas Atendida
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Matrículas Equivalentes'
+		dataType: string
+		lineageTag: 540962b7-f43e-4548-9512-5c05d3a94346
+		summarizeBy: none
+		sourceColumn: Matrículas Equivalentes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Modalidade de Ensino'
+		dataType: string
+		lineageTag: 1671d4ac-56a0-415d-9c05-4220697e653e
+		summarizeBy: none
+		sourceColumn: Modalidade de Ensino
+
+		annotation SummarizationSetBy = Automatic
+
+	column Município
+		dataType: string
+		lineageTag: b15ee84d-1825-4aba-9fc0-38f9392209eb
+		summarizeBy: none
+		sourceColumn: Município
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mês De Ocorrência da Situação'
+		dataType: string
+		lineageTag: 1844f7c1-201e-4d12-9d30-8a7b7349d6d6
+		summarizeBy: none
+		sourceColumn: Mês De Ocorrência da Situação
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nome de Curso'
+		dataType: string
+		lineageTag: dc621159-b581-42e1-9606-3f7fb964226f
+		summarizeBy: none
+		sourceColumn: Nome de Curso
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Número de registros'
+		dataType: string
+		lineageTag: b2f6fd0c-620c-465c-a07f-a5882f65b014
+		summarizeBy: none
+		sourceColumn: Número de registros
+
+		annotation SummarizationSetBy = Automatic
+
+	column Região
+		dataType: string
+		lineageTag: 6ddfb730-d2db-4c8f-a7cc-8ec663d3fb10
+		summarizeBy: none
+		sourceColumn: Região
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Renda Familiar'
+		dataType: string
+		lineageTag: dd816294-84f6-4f4b-9f28-68b30d9eef87
+		summarizeBy: none
+		sourceColumn: Renda Familiar
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sexo
+		dataType: string
+		lineageTag: d260cd0f-7c24-47f8-8d65-3114d410d856
+		summarizeBy: none
+		sourceColumn: Sexo
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Situação de Matrícula'
+		dataType: string
+		lineageTag: b339551f-c6a3-4579-902d-fb047ebbba03
+		summarizeBy: none
+		sourceColumn: Situação de Matrícula
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Forma de Ingresso'
+		dataType: string
+		lineageTag: d3d99792-e43c-4e5f-82ae-9740d87be88d
+		summarizeBy: none
+		sourceColumn: Forma de Ingresso
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Subeixo Tecnológico'
+		dataType: string
+		lineageTag: 2bc668b2-25e3-4fca-90ad-7fa60f0e0dc2
+		summarizeBy: none
+		sourceColumn: Subeixo Tecnológico
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tipo de Curso'
+		dataType: string
+		lineageTag: af30febf-bfa8-464c-af30-77388c8d2d6c
+		summarizeBy: none
+		sourceColumn: Tipo de Curso
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tipo de Oferta'
+		dataType: string
+		lineageTag: 7b282536-ce92-4332-bfd7-c310f3558246
+		summarizeBy: none
+		sourceColumn: Tipo de Oferta
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total de Inscritos'
+		dataType: string
+		lineageTag: 38d3032e-77aa-4009-a869-853298892bc7
+		summarizeBy: none
+		sourceColumn: Total de Inscritos
+
+		annotation SummarizationSetBy = Automatic
+
+	column Turno
+		dataType: string
+		lineageTag: 94039c2e-1862-4128-97a2-0cbd0ef3ca41
+		summarizeBy: none
+		sourceColumn: Turno
+
+		annotation SummarizationSetBy = Automatic
+
+	column UF
+		dataType: string
+		lineageTag: c0a06808-62d5-4946-a473-3ebb361754bc
+		summarizeBy: none
+		sourceColumn: UF
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unidade de Ensino'
+		dataType: string
+		lineageTag: 9a77084b-abab-419d-bfee-71e32373f397
+		summarizeBy: none
+		sourceColumn: Unidade de Ensino
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Programa SISTEC'
+		dataType: string
+		lineageTag: 1fffd3b1-b13a-4e88-8023-e9ba8ae6ec95
+		summarizeBy: none
+		sourceColumn: Programa SISTEC
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Vagas Extraordinárias AC'
+		dataType: string
+		lineageTag: f73e1e52-60f1-4027-9026-ed6873b4be27
+		summarizeBy: none
+		sourceColumn: Vagas Extraordinárias AC
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Vagas Extraordinárias l1'
+		dataType: string
+		lineageTag: 2b0d336f-cf27-4007-a582-542ef182706c
+		summarizeBy: none
+		sourceColumn: Vagas Extraordinárias l1
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Vagas Extraordinárias l10'
+		dataType: string
+		lineageTag: b60aa43f-b278-482d-aaaa-eaf5c25398cd
+		summarizeBy: none
+		sourceColumn: Vagas Extraordinárias l10
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Vagas Extraordinárias l13'
+		dataType: string
+		lineageTag: e9059374-1810-497d-9c1f-f10b74d6c0ff
+		summarizeBy: none
+		sourceColumn: Vagas Extraordinárias l13
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Vagas Extraordinárias l14'
+		dataType: string
+		lineageTag: c4047aa5-7eab-4af8-85a6-1d01bc87b3d8
+		summarizeBy: none
+		sourceColumn: Vagas Extraordinárias l14
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Vagas Extraordinárias l2'
+		dataType: string
+		lineageTag: 09f84c1d-4a75-4537-90cd-a1891af3c0cc
+		summarizeBy: none
+		sourceColumn: Vagas Extraordinárias l2
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Vagas Extraordinárias l5'
+		dataType: string
+		lineageTag: 3d4853f3-3f4c-49a7-85f2-56adb426ca5a
+		summarizeBy: none
+		sourceColumn: Vagas Extraordinárias l5
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Vagas Extraordinárias l6'
+		dataType: string
+		lineageTag: 09326d93-8ee2-4db1-b627-6cc535b28c84
+		summarizeBy: none
+		sourceColumn: Vagas Extraordinárias l6
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Vagas Extraordinárias l9'
+		dataType: string
+		lineageTag: 224c3ce1-ed42-400e-abef-a2e628107223
+		summarizeBy: none
+		sourceColumn: Vagas Extraordinárias l9
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Vagas Ofertadas'
+		dataType: string
+		lineageTag: 4963ebb2-5894-42ca-879b-cf864c4d3774
+		summarizeBy: none
+		sourceColumn: Vagas Ofertadas
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Vagas Regulares AC'
+		dataType: string
+		lineageTag: fa7885a1-7ac9-4669-93c1-1636f45d6131
+		summarizeBy: none
+		sourceColumn: Vagas Regulares AC
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Vagas Regulares l1'
+		dataType: string
+		lineageTag: 99badcc4-3c4a-4677-a1ea-bc984074fc39
+		summarizeBy: none
+		sourceColumn: Vagas Regulares l1
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Vagas Regulares l10'
+		dataType: string
+		lineageTag: 9c1c6802-9a75-4263-b8be-ceacd538c132
+		summarizeBy: none
+		sourceColumn: Vagas Regulares l10
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Vagas Regulares l13'
+		dataType: string
+		lineageTag: 85f15431-f5b6-4f68-a15a-ae6cc9431d3c
+		summarizeBy: none
+		sourceColumn: Vagas Regulares l13
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Vagas Regulares l14'
+		dataType: string
+		lineageTag: 12eacf1e-ccec-4d8b-b0bf-be0a344fe670
+		summarizeBy: none
+		sourceColumn: Vagas Regulares l14
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Vagas Regulares l2'
+		dataType: string
+		lineageTag: 4e20c895-de32-4ae8-8f6e-528a90593664
+		summarizeBy: none
+		sourceColumn: Vagas Regulares l2
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Vagas Regulares l5'
+		dataType: string
+		lineageTag: 3b266993-f7c1-499c-809d-545f69efad00
+		summarizeBy: none
+		sourceColumn: Vagas Regulares l5
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Vagas Regulares l6'
+		dataType: string
+		lineageTag: 00f2262f-d6a7-48b4-a032-978acb608994
+		summarizeBy: none
+		sourceColumn: Vagas Regulares l6
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Vagas Regulares l9'
+		dataType: string
+		lineageTag: 72585b53-9e67-45df-9601-f3b40896fde1
+		summarizeBy: none
+		sourceColumn: Vagas Regulares l9
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sit. Inconsistência Curso'
+		dataType: string
+		lineageTag: 88156a1e-6291-4054-8742-ec57acdf582a
+		summarizeBy: none
+		sourceColumn: Sit. Inconsistência Curso
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sit. Inconsistência Ciclo'
+		dataType: string
+		lineageTag: d69e9fd6-c539-4bb5-b6c1-8c6cd84aca82
+		summarizeBy: none
+		sourceColumn: Sit. Inconsistência Ciclo
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sit. Inconsistência Matrícula'
+		dataType: string
+		lineageTag: c2dfbb5e-d29f-4dc9-ae1c-42fdd4ce9bc7
+		summarizeBy: none
+		sourceColumn: Sit. Inconsistência Matrícula
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Curso Excluído'
+		dataType: string
+		lineageTag: e8a89305-8264-4fc3-989c-f8fb341dfff9
+		summarizeBy: none
+		sourceColumn: Curso Excluído
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ciclo Excluído'
+		dataType: string
+		lineageTag: bdf3f5e9-398d-4d1b-a9f3-3120cc669e60
+		summarizeBy: none
+		sourceColumn: Ciclo Excluído
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Matrícula Excluída'
+		dataType: string
+		lineageTag: 0fded4ea-c065-43e7-81ff-18c46570691b
+		summarizeBy: none
+		sourceColumn: Matrícula Excluída
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Matrícula Atendida'
+		dataType: string
+		lineageTag: a33d6788-6d9c-4604-a66d-074a3f3362dc
+		summarizeBy: none
+		sourceColumn: Matrícula Atendida
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Just. de Nome de Curso Aceita'
+		dataType: string
+		lineageTag: bb168be3-f04f-4382-9f2a-bd156888ee81
+		summarizeBy: none
+		sourceColumn: Just. de Nome de Curso Aceita
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Just. de Evazão Zero Aceita'
+		dataType: string
+		lineageTag: ac70c3bb-f0d7-45ed-adbc-6d3eaa860128
+		summarizeBy: none
+		sourceColumn: Just. de Evazão Zero Aceita
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Just. de C.H. aceita'
+		dataType: string
+		lineageTag: 23b62b03-cce2-4d49-a514-93e48ece60a9
+		summarizeBy: none
+		sourceColumn: Just. de C.H. aceita
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Just. de Duração do Ciclo Aceita'
+		dataType: string
+		lineageTag: 568cc335-c4aa-4c7a-9e44-c29973b9b85c
+		summarizeBy: none
+		sourceColumn: Just. de Duração do Ciclo Aceita
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Just. de Retenção Aceita'
+		dataType: string
+		lineageTag: fc00797d-bec1-41c9-8d6e-45d9c843085d
+		summarizeBy: none
+		sourceColumn: Just. de Retenção Aceita
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dadosIFFAr_enviadosPNP2024 = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("H:\Drives compartilhados\PI IFFar\PNP\PNP 2025\dadosIFFAr_enviadosPNP2024.csv"),[Delimiter=";", Columns=70, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true])
+				in
+				    #"Cabeçalhos Promovidos"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

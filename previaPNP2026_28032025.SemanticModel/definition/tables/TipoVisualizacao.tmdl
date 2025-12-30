@@ -1,0 +1,52 @@
+table TipoVisualizacao
+	lineageTag: de7827b7-1ce7-42ae-83ca-ece34c91e923
+
+	column TipoVisualizacao
+		lineageTag: 6ee90fd0-3051-498b-ae3f-3e49eff135c8
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'TipoVisualizacao Pedido'
+
+		relatedColumnDetails
+			groupByColumn: 'TipoVisualizacao Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'TipoVisualizacao Campos'
+		isHidden
+		lineageTag: 9219a557-0823-405f-8d35-79e5dcc3fa8d
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'TipoVisualizacao Pedido'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'TipoVisualizacao Pedido'
+		isHidden
+		formatString: 0
+		lineageTag: 8bfdc979-5301-4109-a2b5-5683dd34481d
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition TipoVisualizacao = calculated
+		mode: import
+		source =
+				{
+				    ("Campus", NAMEOF('dimCampus'[CIDADE]), 0),
+				    ("Tipo de Curso", NAMEOF('dimCurso'[SUBTIPO CURSOS]), 1),
+				    ("Oferta (Técnico)", NAMEOF('dimCurso'[TIPO OFERTA DO CURSO]), 2),
+				    ("Nome do Curso", NAMEOF('dimCurso'[NOME DO CURSO AJUSTADO]), 3),
+				    ("Modalidade", NAMEOF('dimCurso'[MODALIDADE ENSINO]), 4),
+				    ("Ciclo", NAMEOF('dimCiclo'[CÓDIGO CICLO DE MATRÍCULA]), 5)
+				}
+
+	annotation PBI_Id = 5084e84471544776893b8bcedcc34ccf
+

@@ -1,0 +1,220 @@
+table fMatriculas
+	lineageTag: 8a334439-450b-448b-9a60-23eb2469a0f8
+
+	column NU_CPF
+		dataType: string
+		lineageTag: 9547dc3d-9d57-4842-8f41-4a9f7b1a2d66
+		summarizeBy: none
+		sourceColumn: NU_CPF
+
+		annotation SummarizationSetBy = Automatic
+
+	column CO_MATRICULA
+		dataType: string
+		lineageTag: 485f4db2-0c68-4c2c-8c3d-d21551d34d61
+		summarizeBy: none
+		sourceColumn: CO_MATRICULA
+
+		annotation SummarizationSetBy = Automatic
+
+	column CO_CICLO_MATRICULA
+		dataType: string
+		lineageTag: ab0d9cf8-e234-46f4-bcb2-d7c7ad91cd3b
+		summarizeBy: none
+		sourceColumn: CO_CICLO_MATRICULA
+
+		annotation SummarizationSetBy = Automatic
+
+	column DT_DATA_INICIO
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2a02af32-aba4-4cd9-b889-1ace7796df1a
+		summarizeBy: none
+		sourceColumn: DT_DATA_INICIO
+
+		variation Variation
+			isDefault
+			relationship: 3b9da14c-9591-4c9c-bf13-d911e027cfe5
+			defaultHierarchy: LocalDateTable_428f8302-9703-4d89-be41-646fd7f82908.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column NO_STATUS_MATRICULA
+		dataType: string
+		lineageTag: eaa12d12-8c74-4cb3-9cfd-909609a29766
+		summarizeBy: none
+		sourceColumn: NO_STATUS_MATRICULA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"fMatriculas","TableItemName":"NO_STATUS_MATRICULA (grupos)","ObjectType":4},"LinkType":"UsedInGroup"}]
+
+	column MES_DE_OCORRENCIA
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 451853f0-f82a-4ad5-a031-e7c0f570801c
+		summarizeBy: none
+		sourceColumn: MES_DE_OCORRENCIA
+
+		variation Variation
+			isDefault
+			relationship: 5b8236c5-7e89-4586-b0cd-e4ee6a82285a
+			defaultHierarchy: LocalDateTable_a7abcf61-e04e-45f0-9ea9-ef9eabefe373.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column MatriculaAtendida
+		dataType: string
+		lineageTag: f363e03c-a190-4edd-82a4-dc8f60e3f962
+		summarizeBy: none
+		sourceColumn: MatriculaAtendida
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'NO_STATUS_MATRICULA (grupos)' =
+			SWITCH(
+				TRUE,
+				ISBLANK('fMatriculas'[NO_STATUS_MATRICULA]),
+				"(Em branco)",
+				'fMatriculas'[NO_STATUS_MATRICULA] IN {"ABANDONO",
+					"DESLIGADO",
+					"TRANSF_EXT"},
+				"EVASÕES",
+				'fMatriculas'[NO_STATUS_MATRICULA]
+			)
+		lineageTag: 4a6b7ab5-e245-4d2d-b81d-92bd9bd784fa
+		summarizeBy: none
+
+		extendedProperty GroupingMetadata =
+				{
+				  "version": 0,
+				  "groupedColumns": [
+				    {
+				      "Column": {
+				        "Expression": {
+				          "SourceRef": {
+				            "Entity": "fMatriculas"
+				          }
+				        },
+				        "Property": "NO_STATUS_MATRICULA"
+				      }
+				    }
+				  ]
+				}
+
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"f","Entity":"fMatriculas"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"f"}},"Property":"NO_STATUS_MATRICULA"}}],"GroupItems":[{"DisplayName":"(Em branco)","BlankDefaultPlaceholder":true},{"DisplayName":"EVASÕES","Expression":{"In":{"Expressions":[{"Column":{"Expression":{"SourceRef":{"Source":"f"}},"Property":"NO_STATUS_MATRICULA"}}],"Values":[[{"Literal":{"Value":"'ABANDONO'"}}],[{"Literal":{"Value":"'DESLIGADO'"}}],[{"Literal":{"Value":"'TRANSF_EXT'"}}]]}}}]}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'microdados_PNP_matriculas_IFFarroupilha_filtrado.Código da Matricula'
+		dataType: string
+		lineageTag: 725a6a26-ae22-4c10-8a9f-ba1841818724
+		summarizeBy: none
+		sourceColumn: microdados_PNP_matriculas_IFFarroupilha_filtrado.Código da Matricula
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'microdados_PNP_matriculas_IFFarroupilha_filtrado.Mês De Ocorrência da Situação'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b826647b-1210-4488-ac80-0c91816e4008
+		summarizeBy: none
+		sourceColumn: microdados_PNP_matriculas_IFFarroupilha_filtrado.Mês De Ocorrência da Situação
+
+		variation Variation
+			isDefault
+			relationship: 938234e0-b835-4094-8803-c176b7c4906d
+			defaultHierarchy: LocalDateTable_ecc737b4-8e17-40c6-a054-1b9d5ec20f53.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'microdados_PNP_matriculas_IFFarroupilha_filtrado.Situação de Matrícula'
+		dataType: string
+		lineageTag: d9fa1749-fac1-43a1-8771-4f21c243c85a
+		summarizeBy: none
+		sourceColumn: microdados_PNP_matriculas_IFFarroupilha_filtrado.Situação de Matrícula
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status_corrigido
+		dataType: string
+		lineageTag: a3028ea4-1850-4183-a8c3-929bd0d3ada7
+		summarizeBy: none
+		sourceColumn: Status_corrigido
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mês_ocorrencia_corrigido
+		dataType: string
+		lineageTag: 8c659346-263c-4e30-9169-47ec7a64ad0f
+		summarizeBy: none
+		sourceColumn: Mês_ocorrencia_corrigido
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'dadosIFFAr_enviadosPNP2024.Mês De Ocorrência da Situação'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d5c86f49-c4c2-44b1-842c-7c239a2be1e3
+		summarizeBy: none
+		sourceColumn: dadosIFFAr_enviadosPNP2024.Mês De Ocorrência da Situação
+
+		variation Variation
+			isDefault
+			relationship: 0565efa8-f6ba-4338-9064-939197ccf761
+			defaultHierarchy: LocalDateTable_5c5ad22a-cdf0-49aa-8454-612db3fd6248.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'dadosIFFAr_enviadosPNP2024.Situação de Matrícula'
+		dataType: string
+		lineageTag: 0aa6f45d-f99e-46e6-8913-c7edd7be94de
+		summarizeBy: none
+		sourceColumn: dadosIFFAr_enviadosPNP2024.Situação de Matrícula
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fMatriculas = m
+		mode: import
+		source =
+				let
+				    Fonte = Folder.Files("H:\Drives compartilhados\PI IFFar\SISTEC\Extração de Dados SISTEC\Extração 2025\11novembro\1912\matriculas"),
+				    #"Arquivos Ocultos Filtrados1" = Table.SelectRows(Fonte, each [Attributes]?[Hidden]? <> true),
+				    #"Invocar Função Personalizada1" = Table.AddColumn(#"Arquivos Ocultos Filtrados1", "Transformar Arquivo (2)", each #"Transformar Arquivo (2)"([Content])),
+				    #"Colunas Renomeadas1" = Table.RenameColumns(#"Invocar Função Personalizada1", {"Name", "Nome da Origem"}),
+				    #"Outras Colunas Removidas1" = Table.SelectColumns(#"Colunas Renomeadas1", {"Nome da Origem", "Transformar Arquivo (2)"}),
+				    #"Coluna de Tabela Expandida1" = Table.ExpandTableColumn(#"Outras Colunas Removidas1", "Transformar Arquivo (2)", Table.ColumnNames(#"Transformar Arquivo (2)"(#"Arquivo de Amostra (2)"))),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(#"Coluna de Tabela Expandida1",{"NU_CPF", "CO_MATRICULA", "CO_CICLO_MATRICULA", "DT_DATA_INICIO", "NO_STATUS_MATRICULA", "MES_DE_OCORRENCIA"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Outras Colunas Removidas",{{"MES_DE_OCORRENCIA", type date}}),
+				    #"Consultas Mescladas1" = Table.NestedJoin(#"Tipo Alterado", {"CO_MATRICULA"}, microdados_PNP_matriculas_IFFarroupilha_filtrado, {"Código da Matricula"}, "microdados_PNP_matriculas_IFFarroupilha_filtrado", JoinKind.LeftOuter),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Consultas Mescladas1",{{"CO_MATRICULA", type text}}),
+				    #"microdados_PNP_matriculas_IFFarroupilha_filtrado Expandido" = Table.ExpandTableColumn(#"Tipo Alterado1", "microdados_PNP_matriculas_IFFarroupilha_filtrado", {"Ano", "Código da Matricula", "Mês De Ocorrência da Situação", "Situação de Matrícula"}, {"microdados_PNP_matriculas_IFFarroupilha_filtrado.Ano", "microdados_PNP_matriculas_IFFarroupilha_filtrado.Código da Matricula", "microdados_PNP_matriculas_IFFarroupilha_filtrado.Mês De Ocorrência da Situação", "microdados_PNP_matriculas_IFFarroupilha_filtrado.Situação de Matrícula"}),
+				    #"Texto em Maiúscula1" = Table.TransformColumns(#"microdados_PNP_matriculas_IFFarroupilha_filtrado Expandido",{{"microdados_PNP_matriculas_IFFarroupilha_filtrado.Situação de Matrícula", Text.Upper, type text}}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Texto em Maiúscula1","EM CURSO","EM_CURSO",Replacer.ReplaceText,{"microdados_PNP_matriculas_IFFarroupilha_filtrado.Situação de Matrícula"}),
+				    #"Valor Substituído2" = Table.ReplaceValue(#"Valor Substituído1","DESLIGADA","DESLIGADO",Replacer.ReplaceText,{"microdados_PNP_matriculas_IFFarroupilha_filtrado.Situação de Matrícula"}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Valor Substituído2","REPROVADO","REPROVADA",Replacer.ReplaceText,{"microdados_PNP_matriculas_IFFarroupilha_filtrado.Situação de Matrícula"}),
+				    #"Valor Substituído3" = Table.ReplaceValue(#"Valor Substituído","TRANSF. EXTERNA","TRANSF_EXT",Replacer.ReplaceText,{"microdados_PNP_matriculas_IFFarroupilha_filtrado.Situação de Matrícula"}),
+				    #"Valor Substituído4" = Table.ReplaceValue(#"Valor Substituído3","TRANSF. INTERNA","TRANSF_INT",Replacer.ReplaceText,{"microdados_PNP_matriculas_IFFarroupilha_filtrado.Situação de Matrícula"}),
+				    #"Coluna Condicional Adicionada2" = Table.AddColumn(#"Valor Substituído4", "Status_corrigido", each if [microdados_PNP_matriculas_IFFarroupilha_filtrado.Situação de Matrícula] = null then [NO_STATUS_MATRICULA] else if [microdados_PNP_matriculas_IFFarroupilha_filtrado.Situação de Matrícula] = "EM_CURSO" then [NO_STATUS_MATRICULA] else if [microdados_PNP_matriculas_IFFarroupilha_filtrado.Situação de Matrícula] <> [NO_STATUS_MATRICULA] then [microdados_PNP_matriculas_IFFarroupilha_filtrado.Situação de Matrícula] else [microdados_PNP_matriculas_IFFarroupilha_filtrado.Situação de Matrícula]),
+				    #"Coluna Condicional Adicionada3" = Table.AddColumn(#"Coluna Condicional Adicionada2", "Mês_ocorrencia_corrigido", each if [microdados_PNP_matriculas_IFFarroupilha_filtrado.Mês De Ocorrência da Situação] = null then [MES_DE_OCORRENCIA] else if [microdados_PNP_matriculas_IFFarroupilha_filtrado.Situação de Matrícula] = "EM_CURSO" then [MES_DE_OCORRENCIA] else if [NO_STATUS_MATRICULA] <> [microdados_PNP_matriculas_IFFarroupilha_filtrado.Situação de Matrícula] then [microdados_PNP_matriculas_IFFarroupilha_filtrado.Mês De Ocorrência da Situação] else [microdados_PNP_matriculas_IFFarroupilha_filtrado.Mês De Ocorrência da Situação]),
+				    #"Coluna Condicional Adicionada" = Table.AddColumn(#"Coluna Condicional Adicionada3", "MatriculaAtendida", each if Text.Contains([DT_DATA_INICIO], "2025") then "Sim" else if [Status_corrigido] = "EM_CURSO" then "Sim" else if [Mês_ocorrencia_corrigido] >= #date(2025, 1, 1) then "Sim" else "Nao"),
+				    #"Linhas Filtradas" = Table.SelectRows(#"Coluna Condicional Adicionada", each [MatriculaAtendida] = "Sim"),
+				    #"Outras Colunas Removidas2" = Table.SelectColumns(#"Linhas Filtradas",{"NU_CPF", "CO_MATRICULA", "CO_CICLO_MATRICULA", "DT_DATA_INICIO", "NO_STATUS_MATRICULA", "MES_DE_OCORRENCIA", "microdados_PNP_matriculas_IFFarroupilha_filtrado.Código da Matricula", "microdados_PNP_matriculas_IFFarroupilha_filtrado.Mês De Ocorrência da Situação", "microdados_PNP_matriculas_IFFarroupilha_filtrado.Situação de Matrícula", "Status_corrigido", "Mês_ocorrencia_corrigido", "MatriculaAtendida"}),
+				    #"Colunas Reordenadas" = Table.ReorderColumns(#"Outras Colunas Removidas2",{"NU_CPF", "CO_CICLO_MATRICULA", "DT_DATA_INICIO", "CO_MATRICULA", "microdados_PNP_matriculas_IFFarroupilha_filtrado.Código da Matricula", "MES_DE_OCORRENCIA", "microdados_PNP_matriculas_IFFarroupilha_filtrado.Mês De Ocorrência da Situação", "NO_STATUS_MATRICULA", "microdados_PNP_matriculas_IFFarroupilha_filtrado.Situação de Matrícula", "Status_corrigido", "Mês_ocorrencia_corrigido", "MatriculaAtendida"}),
+				    #"Tipo Alterado2" = Table.TransformColumnTypes(#"Colunas Reordenadas",{{"DT_DATA_INICIO", type datetime}}),
+				    #"Consultas Mescladas" = Table.NestedJoin(#"Tipo Alterado2", {"CO_MATRICULA"}, dadosIFFAr_enviadosPNP2024, {"Código da Matricula"}, "dadosIFFAr_enviadosPNP2024", JoinKind.LeftOuter),
+				    #"dadosIFFAr_enviadosPNP2024 Expandido" = Table.ExpandTableColumn(#"Consultas Mescladas", "dadosIFFAr_enviadosPNP2024", {"Mês De Ocorrência da Situação", "Situação de Matrícula"}, {"dadosIFFAr_enviadosPNP2024.Mês De Ocorrência da Situação", "dadosIFFAr_enviadosPNP2024.Situação de Matrícula"}),
+				    #"Tipo Alterado3" = Table.TransformColumnTypes(#"dadosIFFAr_enviadosPNP2024 Expandido",{{"dadosIFFAr_enviadosPNP2024.Mês De Ocorrência da Situação", type date}})
+				in
+				    #"Tipo Alterado3"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

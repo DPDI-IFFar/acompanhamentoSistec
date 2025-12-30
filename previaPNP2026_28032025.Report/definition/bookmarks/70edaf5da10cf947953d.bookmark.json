@@ -1,0 +1,927 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/1.4.0/schema.json",
+  "displayName": "SEM FIC",
+  "name": "70edaf5da10cf947953d",
+  "options": {
+    "targetVisualNames": []
+  },
+  "explorationState": {
+    "version": "1.11",
+    "activeSection": "868e6cb89fe5bb7b3ab4",
+    "sections": {
+      "868e6cb89fe5bb7b3ab4": {
+        "filters": {
+          "byExpr": [
+            {
+              "name": "f06276165538049c0502",
+              "type": "Categorical",
+              "expression": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fMatriculas"
+                    }
+                  },
+                  "Property": "DT_DATA_INICIO"
+                }
+              },
+              "howCreated": 1
+            },
+            {
+              "name": "485e71f8422415555d18",
+              "type": "Categorical",
+              "filter": {
+                "Version": 2,
+                "From": [
+                  {
+                    "Name": "d",
+                    "Entity": "dimCiclo",
+                    "Type": 0
+                  }
+                ],
+                "Where": [
+                  {
+                    "Condition": {
+                      "Not": {
+                        "Expression": {
+                          "In": {
+                            "Expressions": [
+                              {
+                                "Column": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Source": "d"
+                                    }
+                                  },
+                                  "Property": "SUBTIPO CURSOS"
+                                }
+                              }
+                            ],
+                            "Values": [
+                              [
+                                {
+                                  "Literal": {
+                                    "Value": "'Formação Continuada'"
+                                  }
+                                }
+                              ],
+                              [
+                                {
+                                  "Literal": {
+                                    "Value": "'Formação Inicial'"
+                                  }
+                                }
+                              ],
+                              [
+                                {
+                                  "Literal": {
+                                    "Value": "'Mulheres Mil'"
+                                  }
+                                }
+                              ]
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              "expression": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dimCiclo"
+                    }
+                  },
+                  "Property": "SUBTIPO CURSOS"
+                }
+              },
+              "howCreated": 1
+            }
+          ]
+        },
+        "visualContainers": {
+          "02781ef0dba2ccc16e87": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "20a979716a3e0b4e02e5",
+                  "type": "Advanced",
+                  "expression": {
+                    "Arithmetic": {
+                      "Left": {
+                        "Measure": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "_CategoriasMatriculas"
+                            }
+                          },
+                          "Property": "_ValoresPorCategoria"
+                        }
+                      },
+                      "Right": {
+                        "ScopedEval": {
+                          "Expression": {
+                            "Measure": {
+                              "Expression": {
+                                "SourceRef": {
+                                  "Entity": "_CategoriasMatriculas"
+                                }
+                              },
+                              "Property": "_ValoresPorCategoria"
+                            }
+                          },
+                          "Scope": [
+                            {
+                              "RoleRef": {
+                                "Role": "Columns"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      "Operator": 3
+                    }
+                  },
+                  "howCreated": 1
+                },
+                {
+                  "name": "d263c957f7473ed1e741",
+                  "type": "Advanced",
+                  "expression": {
+                    "Arithmetic": {
+                      "Left": {
+                        "Measure": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "_CategoriasMatriculas"
+                            }
+                          },
+                          "Property": "_ValoresPorCategoria"
+                        }
+                      },
+                      "Right": {
+                        "ScopedEval": {
+                          "Expression": {
+                            "Measure": {
+                              "Expression": {
+                                "SourceRef": {
+                                  "Entity": "_CategoriasMatriculas"
+                                }
+                              },
+                              "Property": "_ValoresPorCategoria"
+                            }
+                          },
+                          "Scope": [
+                            {
+                              "RoleRef": {
+                                "Role": "Rows"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      "Operator": 3
+                    }
+                  },
+                  "howCreated": 1
+                },
+                {
+                  "name": "58fcd50116aba16b6cd5",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dimCurso"
+                        }
+                      },
+                      "Property": "SUBTIPO CURSOS"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "d4629e7b63ce92fea306",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Medidas"
+                        }
+                      },
+                      "Property": "IEA_Concluidos"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "31207b1b0ea899def294",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dimCampus"
+                        }
+                      },
+                      "Property": "CIDADE"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "715d508f0ebf5a8b2394",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Medidas"
+                        }
+                      },
+                      "Property": "IEA_Evadidos"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "b38e8b3ef38bb06e9449",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Medidas"
+                        }
+                      },
+                      "Property": "IEA_Retidos"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "9cb52a30fd9fba88c5d6",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Medidas"
+                        }
+                      },
+                      "Property": "IEA_MedidaFinal"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "49dc07fa2c71499cda02",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dimEstudante"
+                        }
+                      },
+                      "Property": "NO_ALUNO"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "93ab9a3ecef51b8673c7",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dimCurso"
+                        }
+                      },
+                      "Property": "MODALIDADE ENSINO"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "e08309a738e937d56e35",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dimCurso"
+                        }
+                      },
+                      "Property": "TIPO OFERTA DO CURSO"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "850466b30e1dc757ed2c",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dimCurso"
+                        }
+                      },
+                      "Property": "NOME DO CURSO AJUSTADO"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "408bc85dbf2bc8b70f95",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dimCiclo"
+                        }
+                      },
+                      "Property": "CÓDIGO CICLO DE MATRÍCULA"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "pivotTable",
+              "objects": {},
+              "activeProjections": {
+                "Rows": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dimCampus"
+                        }
+                      },
+                      "Property": "CIDADE"
+                    }
+                  }
+                ]
+              },
+              "projections": {
+                "Rows": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dimCampus"
+                        }
+                      },
+                      "Property": "CIDADE"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dimCurso"
+                        }
+                      },
+                      "Property": "MODALIDADE ENSINO"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dimCurso"
+                        }
+                      },
+                      "Property": "SUBTIPO CURSOS"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dimCurso"
+                        }
+                      },
+                      "Property": "TIPO OFERTA DO CURSO"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dimCurso"
+                        }
+                      },
+                      "Property": "NOME DO CURSO AJUSTADO"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dimCiclo"
+                        }
+                      },
+                      "Property": "CÓDIGO CICLO DE MATRÍCULA"
+                    }
+                  },
+                  {
+                    "Literal": {
+                      "Value": "null"
+                    }
+                  }
+                ],
+                "Values": [
+                  {
+                    "Literal": {
+                      "Value": "null"
+                    }
+                  },
+                  {
+                    "Literal": {
+                      "Value": "null"
+                    }
+                  },
+                  {
+                    "Literal": {
+                      "Value": "null"
+                    }
+                  },
+                  {
+                    "Literal": {
+                      "Value": "null"
+                    }
+                  }
+                ]
+              },
+              "parameters": {
+                "Rows": [
+                  {
+                    "expr": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "TipoVisualizacao"
+                          }
+                        },
+                        "Property": "TipoVisualizacao"
+                      }
+                    },
+                    "index": 0,
+                    "length": 6
+                  }
+                ]
+              },
+              "expansionStates": [
+                {
+                  "roles": [
+                    "Rows"
+                  ],
+                  "levels": [
+                    {
+                      "queryRefs": [
+                        "dimCampus.CIDADE"
+                      ],
+                      "isCollapsed": true,
+                      "identityKeys": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Entity": "dimCampus"
+                              }
+                            },
+                            "Property": "CIDADE"
+                          }
+                        }
+                      ],
+                      "isPinned": true
+                    },
+                    {
+                      "queryRefs": [
+                        "dimCurso.MODALIDADE ENSINO"
+                      ],
+                      "isCollapsed": true
+                    },
+                    {
+                      "queryRefs": [
+                        "dimCurso.SUBTIPO CURSOS"
+                      ],
+                      "isCollapsed": true
+                    },
+                    {
+                      "queryRefs": [
+                        "dimCurso.TIPO OFERTA DO CURSO"
+                      ],
+                      "isCollapsed": true
+                    },
+                    {
+                      "queryRefs": [
+                        "dimCurso.NOME DO CURSO AJUSTADO"
+                      ],
+                      "isCollapsed": true
+                    },
+                    {
+                      "queryRefs": [
+                        "dimCiclo.CÓDIGO CICLO DE MATRÍCULA"
+                      ],
+                      "isCollapsed": true
+                    }
+                  ],
+                  "root": {
+                    "identityValues": null,
+                    "children": [
+                      {
+                        "identityValues": [
+                          {
+                            "Literal": {
+                              "Value": "'Alegrete'"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          "6f51e785704f725df601": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "3a4bc3aba6a86f2544f3": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "aea6fa61e2b69f3d11b6",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "TipoVisualizacao"
+                        }
+                      },
+                      "Property": "TipoVisualizacao"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "advancedSlicerVisual",
+              "objects": {}
+            }
+          },
+          "ecef9aef68dd32eb8565": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "5993df904598367f698c",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Medidas"
+                        }
+                      },
+                      "Property": "texto_Titulo"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "TextEnhancerByMAQ46ASG0293G65JY43S89DKJ9",
+              "objects": {}
+            }
+          },
+          "5924eb4d9cc14b788b8d": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "0355d3d4e319a4288b1e",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Medidas"
+                        }
+                      },
+                      "Property": "texto_Data"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "TextEnhancerByMAQ46ASG0293G65JY43S89DKJ9",
+              "objects": {}
+            }
+          },
+          "7ef1d5335eeba1c22457": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "8b213eb4fa4b73be6d4d",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Medidas"
+                        }
+                      },
+                      "Property": "texto_TituloSistec"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "TextEnhancerByMAQ46ASG0293G65JY43S89DKJ9",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Medidas"
+                        }
+                      },
+                      "Property": "Matrículas"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "74d70f3ecefbb5377996": {
+            "singleVisual": {
+              "visualType": "bookmarkNavigator",
+              "objects": {}
+            }
+          },
+          "0b8d98a35c5cb625dd2f": {
+            "singleVisual": {
+              "visualType": "pageNavigator",
+              "objects": {}
+            }
+          },
+          "0c1ab6764698d42dae86": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "36cc42ece88c55855e1f": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "ae1cff649ab259116659",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dimCampus"
+                        }
+                      },
+                      "Property": "CIDADE"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dimCampus"
+                        }
+                      },
+                      "Property": "CIDADE"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "669a61d5bcd9f0dcaad0": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "ae1cff649ab259116659",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dimCampus"
+                        }
+                      },
+                      "Property": "CIDADE"
+                    }
+                  },
+                  "howCreated": 1
+                },
+                {
+                  "name": "ef64da51aa507b37db43",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dimCurso"
+                        }
+                      },
+                      "Property": "TIPO_CURSO_PNP"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dimCurso"
+                        }
+                      },
+                      "Property": "TIPO_CURSO_PNP"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "cdbd073f33d17bd361d3": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "ae1cff649ab259116659",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dimCampus"
+                        }
+                      },
+                      "Property": "CIDADE"
+                    }
+                  },
+                  "howCreated": 1
+                },
+                {
+                  "name": "74e6f6185e20838f51c4",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dimCiclo"
+                        }
+                      },
+                      "Property": "TIPO PROGRAMA DO CURSO"
+                    }
+                  },
+                  "howCreated": 1
+                },
+                {
+                  "name": "bb82e17f0a64ba7e795d",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dimCiclo"
+                        }
+                      },
+                      "Property": "MODALIDADE ENSINO"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dimCiclo"
+                        }
+                      },
+                      "Property": "MODALIDADE ENSINO"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "objects": {
+      "merge": {
+        "outspacePane": [
+          {
+            "properties": {
+              "expanded": {
+                "expr": {
+                  "Literal": {
+                    "Value": "true"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

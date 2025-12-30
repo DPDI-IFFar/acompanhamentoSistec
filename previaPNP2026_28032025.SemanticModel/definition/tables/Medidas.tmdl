@@ -1,0 +1,329 @@
+table Medidas
+	lineageTag: 13772a6c-73de-46e2-8b68-f95303ecfbcf
+
+	measure Matrículas = ```
+			
+			
+			VAR ano = 2025
+			
+			RETURN
+			    CALCULATE(
+			        COUNTROWS(fMatriculas),
+			        YEAR(fMatriculas[DT_DATA_INICIO]) <= ano,
+			        fMatriculas[NO_STATUS_MATRICULA] = "EM_CURSO"
+			    )
+			    +
+			    CALCULATE(
+			        COUNTROWS(fMatriculas),
+			        YEAR(fMatriculas[DT_DATA_INICIO]) <= ano,
+			        fMatriculas[NO_STATUS_MATRICULA] <> "EM_CURSO",
+			        YEAR(fMatriculas[MES_DE_OCORRENCIA]) >= ano
+			    )
+			
+			
+			```
+		formatString: 0
+		lineageTag: 311e002e-af25-4306-9567-590f4df4d6af
+
+	measure Matriculas_ingressantes =
+			
+			VAR ano = 2025
+			RETURN
+			CALCULATE(
+			    COUNTROWS(fMatriculas),
+			    YEAR('fMatriculas'[DT_DATA_INICIO])=ano
+			)
+			
+			// VAR ano = 2025
+			// RETURN
+			// CALCULATE(
+			//     [Matrículas],
+			//     FILTER(
+			//         'fMatriculas',
+			//         YEAR('fMatriculas'[DT_DATA_INICIO])=ano
+			//     )
+			// )
+		formatString: 0
+		lineageTag: a8368b08-98eb-4521-8356-2f071a1f9d80
+
+	measure Matriculas_concluidas =
+			
+			CALCULATE(
+			    COUNTROWS(fMatriculas),
+			    'fMatriculas'[NO_STATUS_MATRICULA] = "CONCLUÍDA"
+			)
+		formatString: 0
+		lineageTag: eecfb652-63d7-4cca-8940-d40f2e091076
+
+	measure Matriculas_equivalentes = ```
+			
+			SUMX(
+			    dimCurso,
+			    SWITCH(
+			        TRUE(),
+			        dimCurso[TIPO_CURSO_PNP] = "QUALIFICAÇÃO PROFISSIONAL",
+			            (dimCurso[CARGA HORÁRIA TOTAL] / 800) * dimCurso[TabelaMesclada.FEC] * [Matrículas],
+			        -- Caso contrário, aplica a fórmula padrão
+			        dimCurso[TabelaMesclada.FECH] * dimCurso[TabelaMesclada.FEC] * [Matrículas]
+			    )
+			)
+			
+			```
+		lineageTag: 53fdadb4-39b4-4d3a-9450-8117fd6ba160
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Matriculas_transf_interna =
+			
+			CALCULATE(
+			    COUNTROWS(fMatriculas),
+			    'fMatriculas'[NO_STATUS_MATRICULA] = "TRANSF_INT"
+			)
+		formatString: 0
+		lineageTag: f3bf3b01-5455-4cb6-91f9-84f1d9b45829
+
+	measure Matriculas_transf_externa =
+			
+			CALCULATE(
+			    COUNTROWS(fMatriculas),
+			    'fMatriculas'[NO_STATUS_MATRICULA] = "TRANSF_EXT"
+			)
+		formatString: 0
+		lineageTag: 85a5f8a0-93ef-4575-b966-fd657c36c323
+
+	measure Matriculas_desligadas =
+			
+			CALCULATE(
+			    COUNTROWS(fMatriculas),
+			    'fMatriculas'[NO_STATUS_MATRICULA] = "DESLIGADO"
+			)
+		formatString: 0
+		lineageTag: 05971427-d5b9-469e-90dc-1cec1acf031f
+
+	measure Matriculas_abandonos =
+			
+			CALCULATE(
+			    COUNTROWS(fMatriculas),
+			    'fMatriculas'[NO_STATUS_MATRICULA] = "ABANDONO"
+			)
+		formatString: 0
+		lineageTag: e7f60ce4-32ba-428e-a456-9eaee221544b
+
+	measure Matriculas_emCurso =
+			
+			CALCULATE(
+			    COUNTROWS(fMatriculas),
+			    'fMatriculas'[NO_STATUS_MATRICULA] = "EM_CURSO"
+			)
+		formatString: 0
+		lineageTag: d569482b-27a1-4769-8a8d-7eecba29f4a9
+
+	measure Matriculas_integralizadas =
+			
+			CALCULATE(
+			    COUNTROWS(fMatriculas),
+			    'fMatriculas'[NO_STATUS_MATRICULA] = "INTEGRALIZADA"
+			)
+		formatString: 0
+		lineageTag: 407eb755-a971-4782-a041-ab11cb392907
+
+	measure texto_Titulo =
+			
+			"Pesquisa Institucional"
+		lineageTag: 7bda4f2a-5ae0-4405-86be-ebe5d17afce0
+
+	measure texto_Data =
+			
+			"Atualizado em 19/12/25"
+		lineageTag: 19f0abd5-2804-4264-8fc3-4ace6cd5a143
+
+	measure texto_TituloSistec =
+			
+			"Acompanhamento Sistec | 2025"
+		lineageTag: 2381656f-91e3-4ef1-828e-0c28bd4ab365
+
+	measure MatEquivalente_Tecnico = ```
+			
+			    CALCULATE(
+			        [Matriculas_equivalentes],
+			        dimCurso[SUBTIPO CURSOS] = "Técnico"
+			    )
+			
+			```
+		lineageTag: e6c97be1-5c6d-4c52-93c6-3f0a0b02bf4e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure MatEquivalente_Professores =
+			
+			CALCULATE (
+			    [Matriculas_equivalentes],
+			    dimCurso[Eixo Tecnológico Ajustado] = "DESENVOLVIMENTO EDUCACIONAL E SOCIAL",
+			    FILTER (
+			        dimCurso,
+			        NOT (
+			            CONTAINSSTRING ( dimCurso[NOME DO CURSO AJUSTADO], "cervejeiro" )
+			                || CONTAINSSTRING ( dimCurso[NOME DO CURSO AJUSTADO], "formação complementar ao ensino fundamental" )
+			                || CONTAINSSTRING ( dimCurso[NOME DO CURSO AJUSTADO], "relações com saúde" )
+			                || CONTAINSSTRING ( dimCurso[NOME DO CURSO AJUSTADO], "jovens atletas" )
+			                || CONTAINSSTRING ( dimCurso[NOME DO CURSO AJUSTADO], "beleza e gênero" )
+			        )
+			    )
+			)
+		lineageTag: 2120bde6-87bd-4499-ba78-5fab73b4062b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure MatEquivalente_PROEJA = ```
+			
+			    CALCULATE(
+			        [Matriculas_equivalentes],
+			        FILTER(
+			        'dimCiclo',
+			        CONTAINSSTRING('dimCiclo'[TIPO PROGRAMA DO CURSO], "EJA")
+			    )
+			    )
+			```
+		lineageTag: 6b5043b4-0ce3-4e33-9313-6ad33e290912
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Percentual_PROEJA =
+			
+			DIVIDE(
+			    [MatEquivalente_PROEJA], -- Numerador: Medida para PROEJA
+			    [Matriculas_equivalentes],        -- Denominador: Total
+			    0                        -- Valor padrão em caso de divisão por zero
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: cfceda7c-976a-497f-91fe-aae6238bd1c9
+
+	measure Percentual_Tecnico =
+			
+			DIVIDE(
+			    [MatEquivalente_Tecnico], -- Numerador: Medida para PROEJA
+			    [Matriculas_equivalentes],        -- Denominador: Total
+			    0                        -- Valor padrão em caso de divisão por zero
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 6a92b04a-8cb5-4bd8-b33f-73708b292d6e
+
+	measure Percentual_Professores =
+			
+			DIVIDE(
+			    [MatEquivalente_Professores], -- Numerador: Medida para PROEJA
+			    [Matriculas_equivalentes],        -- Denominador: Total
+			    0                        -- Valor padrão em caso de divisão por zero
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: fa2f9985-008b-4d68-8918-bea32a0be9e3
+
+	measure MatEvadidas = [Matriculas_abandonos]+[Matriculas_desligadas]+[Matriculas_transf_externa]+[Matriculas_transf_interna]
+		formatString: 0
+		lineageTag: b42ad270-0a46-4f65-8039-596656f15013
+
+	measure Taxa_Evasao =
+			
+			DIVIDE(
+			    [MatEvadidas],
+			    [Matrículas],
+			    0                        -- Valor padrão em caso de divisão por zero
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 991249cc-4228-4a47-80b2-1b2f3a7358db
+
+	measure MetaPLPROEJA = 0.1
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 73d7b157-a12d-4c3a-b1ef-d808f1e3a3c8
+
+	measure MetaPLTecnico = 0.5
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: d9b37412-2500-4d75-a3c2-4512d73dda56
+
+	measure MetaPLProf = 0.2
+		lineageTag: 9e6eaf18-c2a9-4292-bedb-d2933d4584ae
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure IEA_Concluidos = ```
+			
+			    CALCULATE(
+			        COUNTROWS('fMatriculasEficienciaAcademica'),
+			        'fMatriculasEficienciaAcademica'[NO_STATUS_MATRICULA2] IN {"CONCLUÍDA", "INTEGRALIZADA"}
+			    )
+			
+			```
+		lineageTag: 9716574e-b504-4e5a-a634-ad172bdf22aa
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure IEA_Evadidos = ```
+			
+			    CALCULATE(
+			        COUNTROWS('fMatriculasEficienciaAcademica'),
+			        'fMatriculasEficienciaAcademica'[NO_STATUS_MATRICULA2] IN {"ABANDONO", "TRANSF_EXT", "TRANSF_INT", "DESLIGADO"}
+			    )
+			```
+		formatString: 0
+		lineageTag: 5af5b30f-004d-4e3a-9e98-421ac4357350
+
+	measure IEA_Retidos = ```
+			
+			    CALCULATE(
+			        COUNTROWS('fMatriculasEficienciaAcademica'),
+			        'fMatriculasEficienciaAcademica'[NO_STATUS_MATRICULA2] = "EM_CURSO"
+			    )
+			
+			```
+		formatString: 0
+		lineageTag: 9cd95d33-3602-49c6-a78d-79ef26ab7669
+
+	measure IEA_MedidaFinal = ```
+			
+			VAR Total_Matriculas = [IEA_Concluidos] + [IEA_Evadidos] + [IEA_Retidos]
+			
+			-- Cálculo dos percentuais
+			VAR Percentual_Concluidos = DIVIDE([IEA_Concluidos], Total_Matriculas, 0)
+			VAR Percentual_Evadidos = DIVIDE([IEA_Evadidos], Total_Matriculas, 0)
+			VAR Percentual_Retidos = DIVIDE([IEA_Retidos], Total_Matriculas, 0)
+			
+			-- Fórmula final
+			RETURN
+			    Percentual_Concluidos +
+			    (Percentual_Concluidos / (Percentual_Concluidos + Percentual_Evadidos) * Percentual_Retidos)
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 2dd5cd41-430e-4c47-8d93-16aeea1fc832
+
+	measure texto_PercentuaisLegais = "A Pesquisa Institucional já solicitou correção no cadastro de carga horária dos cursos vinculados ao Programa EJA INTEGRADA. Além disso, ainda estamos cadastrando as matrículas da Plataforma Conecta (cursos MOOC) do IFFar. Por isso, disponibilizaremos esta página apenas após essas alterações que impactam no cálculo de matrícula equivalente e consequentemente, alterarão os percentuais legais."
+		lineageTag: 0447bb12-56af-48a2-be91-034f06a698f4
+
+	measure Cursos_com_matricula = ```
+			
+			CALCULATE(
+			    COUNTROWS(VALUES(dimCurso[CHAVE_CURSO])),
+			    FILTER(
+			        VALUES(dimCurso[CHAVE_CURSO]),
+			        CALCULATE([Matrículas]) > 0
+			    )
+			)
+			
+			```
+		formatString: 0
+		lineageTag: f9d81f25-9a84-4137-9f94-4619617227c9
+
+	partition Medidas = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Coluna 1" = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"Coluna 1", type text}}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Tipo Alterado",{"Coluna 1"})
+				in
+				    #"Colunas Removidas"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

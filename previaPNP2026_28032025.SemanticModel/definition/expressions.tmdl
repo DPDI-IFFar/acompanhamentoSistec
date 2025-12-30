@@ -1,0 +1,141 @@
+expression 'Arquivo de Amostra' =
+		let
+		    Fonte = Folder.Files("H:\Drives compartilhados\PI IFFar\SISTEC\Extração de Dados SISTEC\Extração 2025\11novembro\1912\ciclos"),
+		    Navegação1 = Fonte{0}[Content]
+		in
+		    Navegação1
+	lineageTag: 4a946cd1-f807-49d1-a3f7-e8b79016194e
+	queryGroup: 'Transformar Arquivo de ciclos\Consultas Auxiliares'
+
+	annotation PBI_ResultType = Binary
+
+expression Parâmetro1 = #"Arquivo de Amostra" meta [IsParameterQuery=true, BinaryIdentifier=#"Arquivo de Amostra", Type="Binary", IsParameterQueryRequired=true]
+	lineageTag: 26cf1523-ad98-416a-bb34-e80464abc501
+	queryGroup: 'Transformar Arquivo de ciclos\Consultas Auxiliares'
+
+	annotation PBI_ResultType = Binary
+
+expression 'Transformar o Arquivo de Exemplo' =
+		let
+		    Fonte = Csv.Document(Parâmetro1,[Delimiter=";", Columns=37, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+		    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true])
+		in
+		    #"Cabeçalhos Promovidos"
+	lineageTag: 041d1acc-1544-4e0f-8621-a34ee8155b05
+	queryGroup: 'Transformar Arquivo de ciclos'
+
+	annotation PBI_ResultType = Table
+
+expression 'Transformar Arquivo' =
+		let
+		    Fonte = (Parâmetro1 as binary) => let
+		    Fonte = Csv.Document(Parâmetro1,[Delimiter=";", Columns=37, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+		    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true])
+		in
+		    #"Cabeçalhos Promovidos"
+		in
+		    Fonte
+	mAttributes: [ FunctionQueryBinding = "{""exemplarFormulaName"":""Transformar o Arquivo de Exemplo""}" ]
+	lineageTag: 422d4c80-1cf1-4ef7-97c7-00471b0fe154
+	queryGroup: 'Transformar Arquivo de ciclos\Consultas Auxiliares'
+
+	annotation PBI_ResultType = Function
+
+expression 'Arquivo de Amostra (2)' =
+		let
+		    Fonte = Folder.Files("H:\Drives compartilhados\PI IFFar\SISTEC\Extração de Dados SISTEC\Extração 2025\11novembro\1912\matriculas"),
+		    Navegação1 = Fonte{0}[Content]
+		in
+		    Navegação1
+	lineageTag: 05905597-f71d-4a36-9e1e-f05d162e3295
+	queryGroup: 'Transformar Arquivo de matriculas\Consultas Auxiliares'
+
+	annotation PBI_ResultType = Binary
+
+expression Parâmetro2 = #"Arquivo de Amostra (2)" meta [IsParameterQuery=true, BinaryIdentifier=#"Arquivo de Amostra (2)", Type="Binary", IsParameterQueryRequired=true]
+	lineageTag: 8234fa64-7e5f-4fc8-86dd-42959ae2fab6
+	queryGroup: 'Transformar Arquivo de matriculas\Consultas Auxiliares'
+
+	annotation PBI_ResultType = Binary
+
+expression 'Transformar o Arquivo de Exemplo (2)' =
+		let
+		    Fonte = Csv.Document(Parâmetro2,[Delimiter=";", Columns=26, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+		    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true])
+		in
+		    #"Cabeçalhos Promovidos"
+	lineageTag: c976c434-d1c1-420c-a921-0b0e1d1652b8
+	queryGroup: 'Transformar Arquivo de matriculas'
+
+	annotation PBI_ResultType = Table
+
+expression 'Transformar Arquivo (2)' =
+		let
+		    Fonte = (Parâmetro2 as binary) => let
+		    Fonte = Csv.Document(Parâmetro2,[Delimiter=";", Columns=26, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+		    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true])
+		in
+		    #"Cabeçalhos Promovidos"
+		in
+		    Fonte
+	mAttributes: [ FunctionQueryBinding = "{""exemplarFormulaName"":""Transformar o Arquivo de Exemplo (2)""}" ]
+	lineageTag: efe1c7a9-3833-47bc-a708-8017d9eb7bf7
+	queryGroup: 'Transformar Arquivo de matriculas\Consultas Auxiliares'
+
+	annotation PBI_ResultType = Function
+
+expression fec_fech =
+		let
+		    Fonte = Excel.Workbook(File.Contents("H:\Drives compartilhados\PI IFFar\SISTEC\Extração de Dados SISTEC\dashboard_SISTEC\previaPNP2025\dados_FEC_PNP.xlsx"), null, true),
+		    Plan1_Sheet = Fonte{[Item="Plan1",Kind="Sheet"]}[Data],
+		    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Plan1_Sheet, [PromoteAllScalars=true]),
+		    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"TIPO DE CURSO", type text}, {"EIXO TECNOLÓGICO", type text}, {"CURSO", type text}, {"FEC", type number}, {"FECH", Int64.Type}, {"MATRÍCULAS", Int64.Type}}),
+		    #"Texto Aparado" = Table.TransformColumns(#"Tipo Alterado",{{"TIPO DE CURSO", Text.Trim, type text}, {"CURSO", Text.Trim, type text}}),
+		    #"Linhas Classificadas" = Table.Sort(#"Texto Aparado",{{"TIPO DE CURSO", Order.Ascending}}),
+		    #"Valor Substituído" = Table.ReplaceValue(#"Linhas Classificadas","ESPECIALIZAÇÃO (LATO SENSU/PROFISSIONAL TECNOLÓGICA)","ESPECIALIZAÇÃO (LATO SENSU)",Replacer.ReplaceText,{"TIPO DE CURSO"}),
+		    #"Valor Substituído1" = Table.ReplaceValue(#"Valor Substituído","MESTRADO PROFISSIONAL","",Replacer.ReplaceText,{"TIPO DE CURSO"}),
+		    // Passo 1: Criar uma referência fixa à tabela original
+		    Origem = #"Valor Substituído1",
+		    #"Linhas Filtradas" = Table.SelectRows(Origem, each true),
+		    #"Valor Substituído2" = Table.ReplaceValue(#"Linhas Filtradas","MESTRADO (ACADÊMICO/PROFISSIONAL)","MESTRADO PROFISSIONAL",Replacer.ReplaceText,{"TIPO DE CURSO"})
+		in
+		    #"Valor Substituído2"
+	lineageTag: e4467141-307a-4012-8531-f107c0ca4257
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
+expression ciclos =
+		let
+		    Fonte = Folder.Files("H:\Drives compartilhados\PI IFFar\SISTEC\Extração de Dados SISTEC\Extração 2025\11novembro\1912\ciclos"),
+		    #"Arquivos Ocultos Filtrados1" = Table.SelectRows(Fonte, each [Attributes]?[Hidden]? <> true),
+		    #"Invocar Função Personalizada1" = Table.AddColumn(#"Arquivos Ocultos Filtrados1", "Transformar Arquivo", each #"Transformar Arquivo"([Content])),
+		    #"Colunas Renomeadas1" = Table.RenameColumns(#"Invocar Função Personalizada1", {"Name", "Nome da Origem"}),
+		    #"Outras Colunas Removidas1" = Table.SelectColumns(#"Colunas Renomeadas1", {"Nome da Origem", "Transformar Arquivo"}),
+		    #"Coluna de Tabela Expandida1" = Table.ExpandTableColumn(#"Outras Colunas Removidas1", "Transformar Arquivo", Table.ColumnNames(#"Transformar Arquivo"(#"Arquivo de Amostra"))),
+		    #"Tipo Alterado" = Table.TransformColumnTypes(#"Coluna de Tabela Expandida1",{{"MUNICIPIO", type text}, {"SISTEMA DE ENSINO", type text}, {"DEPENDÊNCIA ADMINISTRATIVA", type text}, {"TIPO DE ESCOLA", type text}, {"DATA INÍCIO DO CURSO", type datetime}})
+		in
+		    #"Tipo Alterado"
+	lineageTag: 58c96581-fedd-4a84-aed6-f92ee1e45b29
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
+expression matriculas =
+		let
+		    Fonte = Folder.Files("H:\Drives compartilhados\PI IFFar\SISTEC\Extração de Dados SISTEC\Extração 2025\11novembro\1912\matriculas"),
+		    #"Arquivos Ocultos Filtrados1" = Table.SelectRows(Fonte, each [Attributes]?[Hidden]? <> true),
+		    #"Invocar Função Personalizada1" = Table.AddColumn(#"Arquivos Ocultos Filtrados1", "Transformar Arquivo (2)", each #"Transformar Arquivo (2)"([Content])),
+		    #"Colunas Renomeadas1" = Table.RenameColumns(#"Invocar Função Personalizada1", {"Name", "Nome da Origem"}),
+		    #"Outras Colunas Removidas1" = Table.SelectColumns(#"Colunas Renomeadas1", {"Nome da Origem", "Transformar Arquivo (2)"}),
+		    #"Coluna de Tabela Expandida1" = Table.ExpandTableColumn(#"Outras Colunas Removidas1", "Transformar Arquivo (2)", Table.ColumnNames(#"Transformar Arquivo (2)"(#"Arquivo de Amostra (2)")))
+		in
+		    #"Coluna de Tabela Expandida1"
+	lineageTag: 5306a991-a87a-49af-9ea9-96dc3df86404
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

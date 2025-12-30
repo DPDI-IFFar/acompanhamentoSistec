@@ -1,0 +1,51 @@
+table correcaoBaseadaPNP
+	lineageTag: 24bac428-fce5-4c67-9ea9-1216873fb22f
+
+	column CO_MATRICULA
+		dataType: string
+		lineageTag: fea5c335-fe2c-4848-b527-91b2bab00f85
+		summarizeBy: none
+		sourceColumn: CO_MATRICULA
+
+		annotation SummarizationSetBy = Automatic
+
+	column Correcao_Status
+		dataType: string
+		lineageTag: 2a320a07-fe9b-4c77-9293-2243b7d1de21
+		summarizeBy: none
+		sourceColumn: Correcao_Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Correcao_MesOcorrencia
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c461d2bf-a686-425e-a6ac-e32c6b2eaef6
+		summarizeBy: none
+		sourceColumn: Correcao_MesOcorrencia
+
+		variation Variation
+			isDefault
+			relationship: 4425924b-c81b-41e8-b102-b6f9cd3a27dc
+			defaultHierarchy: LocalDateTable_670b88d2-550e-4f6f-84da-cc48809fed60.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition correcaoBaseadaPNP = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("H:\Drives compartilhados\PI IFFar\SISTEC\Extração de Dados SISTEC\dashboard_SISTEC\previaPNP2025\analiseMicrodadosPNPSISTEC.csv"),[Delimiter=";", Columns=32, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"DT_DATA_NASCIMENTO", type datetime}, {"DT_DATA_INICIO", type datetime}, {"DT_DATA_FIM_PREVISTO", type datetime}, {"MES_DE_OCORRENCIA", type date}, {"todos_IFFar_2017a2023.Mês De Ocorrência da Situação", type date}}),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(#"Tipo Alterado",{"CO_MATRICULA", "todos_IFFar_2017a2023.Situação de Matrícula", "todos_IFFar_2017a2023.Mês De Ocorrência da Situação"}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Outras Colunas Removidas",{{"todos_IFFar_2017a2023.Situação de Matrícula", "Correcao_Status"}, {"todos_IFFar_2017a2023.Mês De Ocorrência da Situação", "Correcao_MesOcorrencia"}})
+				in
+				    #"Colunas Renomeadas"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

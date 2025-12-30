@@ -1,0 +1,191 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 948,
+            "y": 0
+          },
+          "nodeIndex": "dimCurso",
+          "nodeLineageTag": "4a5d7403-48e4-4693-8355-0301557555d7",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 514.14285714285711,
+            "y": 2
+          },
+          "nodeIndex": "dimCampus",
+          "nodeLineageTag": "3686ff3f-4082-4756-8eb1-aa965152b5b5",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 1295.7142857142856,
+            "y": 0
+          },
+          "nodeIndex": "dimCiclo",
+          "nodeLineageTag": "ced85472-768a-45da-b7d0-b62d474a6218",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 363.99999999999983,
+            "y": 619.14285714285711
+          },
+          "nodeIndex": "dimEstudante",
+          "nodeLineageTag": "e862ba89-1e2f-430b-a022-b50c68ca181d",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 868.00000000000011,
+            "y": 620
+          },
+          "nodeIndex": "fMatriculas",
+          "nodeLineageTag": "8a334439-450b-448b-9a60-23eb2469a0f8",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 1644.2857142857147,
+            "y": 0
+          },
+          "nodeIndex": "Medidas",
+          "nodeLineageTag": "13772a6c-73de-46e2-8b68-f95303ecfbcf",
+          "size": {
+            "height": 298.28571428571428,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 74.57142857142847
+          },
+          "nodeIndex": "dCalendario",
+          "nodeLineageTag": "f1b0eb1f-5548-4ac4-b636-d4153f7798ce",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 1564.2857142857151,
+            "y": 730.57142857142844
+          },
+          "nodeIndex": "_CategoriasMatriculas",
+          "nodeLineageTag": "aeec8187-d33d-4db4-b3c5-9f0cfa4719bb",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 1608.5714285714289,
+            "y": 380
+          },
+          "nodeIndex": "TipoVisualizacao",
+          "nodeLineageTag": "de7827b7-1ce7-42ae-83ca-ece34c91e923",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 439.28571428571422
+          },
+          "nodeIndex": "fMatriculasEficienciaAcademica",
+          "nodeLineageTag": "d11f74bd-89d3-4f7c-819e-9b266599d5e4",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 1928.2857142857147,
+            "y": 389.28571428571422
+          },
+          "nodeIndex": "correcaoBaseadaPNP",
+          "nodeLineageTag": "24bac428-fce5-4c67-9ea9-1216873fb22f",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2212.2857142857147,
+            "y": 377.28571428571422
+          },
+          "nodeIndex": "microdados_PNP_matriculas_IFFarroupilha_filtrado",
+          "nodeLineageTag": "104b8196-4b93-48ec-8b80-a346e038cfe8",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2496.2857142857147,
+            "y": 315.28571428571422
+          },
+          "nodeIndex": "dadosIFFAr_enviadosPNP2024",
+          "nodeLineageTag": "4aa7a42c-179e-40c4-b781-2c66b80d4653",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Todas as tabelas",
+      "zoomValue": 70,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas as tabelas",
+  "defaultDiagram": "Todas as tabelas"
+}

@@ -1,0 +1,312 @@
+table dimCurso
+	lineageTag: 4a5d7403-48e4-4693-8355-0301557555d7
+
+	column CHAVE_CURSO
+		dataType: string
+		lineageTag: 8d6a8e52-b574-46bd-97c4-c74ac1002633
+		summarizeBy: none
+		sourceColumn: CHAVE_CURSO
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'CÓDIGO UNIDADE DE ENSINO'
+		dataType: string
+		lineageTag: 575f816b-aaec-47f0-9459-75552411749a
+		summarizeBy: none
+		sourceColumn: CÓDIGO UNIDADE DE ENSINO
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SUBTIPO CURSOS'
+		dataType: string
+		lineageTag: b0c04338-3d3b-49c7-b84c-d799ca272b9d
+		summarizeBy: none
+		sourceColumn: SUBTIPO CURSOS
+
+		annotation SummarizationSetBy = Automatic
+
+	column TIPO_CURSO_PNP
+		dataType: string
+		lineageTag: 25204880-aba9-4d25-bbee-3a36339c6f37
+		summarizeBy: none
+		sourceColumn: TIPO_CURSO_PNP
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'CÓDIGO CURSO'
+		dataType: string
+		lineageTag: 245a89a6-f074-4552-a282-ccd998c92d4a
+		summarizeBy: none
+		sourceColumn: CÓDIGO CURSO
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'CARGA HORÁRIA MÍNIMA'
+		dataType: double
+		lineageTag: f83b8c2a-d2e6-488b-9f5a-57210d48f15a
+		summarizeBy: sum
+		sourceColumn: CARGA HORÁRIA MÍNIMA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'CARGA HORÁRIA TOTAL'
+		dataType: int64
+		formatString: 0
+		lineageTag: b31b1dbe-d101-4c10-98be-463b5919e8f7
+		summarizeBy: sum
+		sourceColumn: CARGA HORÁRIA TOTAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MODALIDADE ENSINO'
+		dataType: string
+		lineageTag: a36bb913-f90d-40c6-9412-4b166a4f16db
+		summarizeBy: none
+		sourceColumn: MODALIDADE ENSINO
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'TIPO OFERTA DO CURSO'
+		dataType: string
+		lineageTag: 1eb6c0e6-62a7-4cb2-8d81-0a013267dc90
+		summarizeBy: none
+		sourceColumn: TIPO OFERTA DO CURSO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CO_TIPO_OFERTA_CURSO
+		dataType: string
+		lineageTag: df52b70b-4b51-4928-ae28-20130bd1fab3
+		summarizeBy: none
+		sourceColumn: CO_TIPO_OFERTA_CURSO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CO_MODALIDADE
+		dataType: string
+		lineageTag: 540a55cf-d874-4c02-ad8a-5664325cd02c
+		summarizeBy: none
+		sourceColumn: CO_MODALIDADE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CO_SUBTIPO
+		dataType: string
+		lineageTag: 82b8b043-0b6d-48f6-83c1-54fe6a3edfcc
+		summarizeBy: none
+		sourceColumn: CO_SUBTIPO
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'NOME DO CURSO AJUSTADO'
+		dataType: string
+		lineageTag: 411e55d7-9e0a-4631-9455-eef24d561f5d
+		summarizeBy: none
+		sourceColumn: NOME DO CURSO AJUSTADO
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'TabelaMesclada.TIPO DE CURSO'
+		dataType: string
+		lineageTag: 7a4e25a4-8c8f-4006-9cf5-25a151f514bb
+		summarizeBy: none
+		sourceColumn: TabelaMesclada.TIPO DE CURSO
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'TabelaMesclada.EIXO TECNOLÓGICO'
+		dataType: string
+		lineageTag: 539e65dc-6d0b-40d2-a2b3-27732a5b6c0a
+		summarizeBy: none
+		sourceColumn: TabelaMesclada.EIXO TECNOLÓGICO
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'TabelaMesclada.CURSO'
+		dataType: string
+		lineageTag: cc8ba2af-a290-4953-a739-47d8cf028b3f
+		summarizeBy: none
+		sourceColumn: TabelaMesclada.CURSO
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'TabelaMesclada.FEC'
+		dataType: double
+		lineageTag: 5aca7ac1-8700-4cc5-a590-1854a832d768
+		summarizeBy: sum
+		sourceColumn: TabelaMesclada.FEC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'TabelaMesclada.FECH'
+		dataType: int64
+		formatString: 0
+		lineageTag: e9bf43dd-c262-487f-9b3b-a1b4c9523a32
+		summarizeBy: sum
+		sourceColumn: TabelaMesclada.FECH
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Eixo Tecnológico Ajustado'
+		dataType: string
+		lineageTag: 3d917d26-e191-4a52-b900-499eecda98c9
+		summarizeBy: none
+		sourceColumn: Eixo Tecnológico Ajustado
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dimCurso = m
+		mode: import
+		source = ```
+				let
+				    Fonte = ciclos,
+				    #"Consultas Mescladas" = Table.NestedJoin(Fonte, {"CÓDIGO CICLO DE MATRÍCULA"}, matriculas, {"CO_CICLO_MATRICULA"}, "matriculas", JoinKind.LeftOuter),
+				    #"matriculas Expandido" = Table.ExpandTableColumn(#"Consultas Mescladas", "matriculas", {"Nome da Origem", "CO_ALUNO_IDENTIFICADO", "CO_ALUNO", "NO_ALUNO", "NO_MAE_ALUNO", "SG_SEXO", "DT_DATA_NASCIMENTO", "NU_CPF", "DS_EMAIL", "CO_PESSOA_FISICA_ALUNO", "DS_SENHA", "CO_MATRICULA", "CO_CICLO_MATRICULA", "CO_CURSO", "NU_CARGA_HORARIA", "DT_DATA_INICIO", "DT_DATA_FIM_PREVISTO", "CO_PERIODO_CADASTRO", "NO_CICLO_MATRICULA", "CO_TIPO_OFERTA_CURSO", "CO_TIPO_INSTITUICAO", "CO_PORTFOLIO", "NU_VAGAS_OFERTADAS", "NU_TOTAL_INSCRITOS", "NO_STATUS_MATRICULA", "CO_UNIDADE_ENSINO", "MES_DE_OCORRENCIA"}, {"Nome da Origem.1", "CO_ALUNO_IDENTIFICADO", "CO_ALUNO", "NO_ALUNO", "NO_MAE_ALUNO", "SG_SEXO", "DT_DATA_NASCIMENTO", "NU_CPF", "DS_EMAIL", "CO_PESSOA_FISICA_ALUNO", "DS_SENHA", "CO_MATRICULA", "CO_CICLO_MATRICULA", "CO_CURSO", "NU_CARGA_HORARIA", "DT_DATA_INICIO", "DT_DATA_FIM_PREVISTO", "CO_PERIODO_CADASTRO", "NO_CICLO_MATRICULA", "CO_TIPO_OFERTA_CURSO", "CO_TIPO_INSTITUICAO", "CO_PORTFOLIO", "NU_VAGAS_OFERTADAS", "NU_TOTAL_INSCRITOS", "NO_STATUS_MATRICULA", "CO_UNIDADE_ENSINO", "MES_DE_OCORRENCIA"}),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(#"matriculas Expandido",{"CÓDIGO UNIDADE DE ENSINO", "SUBTIPO CURSOS", "CÓDIGO CURSO", "NOME DO CURSO", "CARGA HORÁRIA MÍNIMA", "CARGA HORÁRIA TOTAL", "MODALIDADE ENSINO", "TIPO OFERTA DO CURSO", "EIXO TECNOLÓGICO", "CÓDIGO DO PORTFÓLIO", "CO_CURSO", "CO_TIPO_OFERTA_CURSO"}),
+				    #"Colunas Reordenadas3" = Table.ReorderColumns(#"Outras Colunas Removidas",{"CÓDIGO CURSO", "CÓDIGO UNIDADE DE ENSINO", "SUBTIPO CURSOS", "NOME DO CURSO", "CARGA HORÁRIA MÍNIMA", "CARGA HORÁRIA TOTAL", "MODALIDADE ENSINO", "TIPO OFERTA DO CURSO", "EIXO TECNOLÓGICO", "CÓDIGO DO PORTFÓLIO", "CO_TIPO_OFERTA_CURSO"}),
+				    #"Colunas Reordenadas1" = Table.ReorderColumns(#"Colunas Reordenadas3",{"CÓDIGO UNIDADE DE ENSINO", "SUBTIPO CURSOS", "CÓDIGO CURSO", "CO_CURSO", "NOME DO CURSO", "CARGA HORÁRIA MÍNIMA", "CARGA HORÁRIA TOTAL", "MODALIDADE ENSINO", "TIPO OFERTA DO CURSO", "CO_TIPO_OFERTA_CURSO", "EIXO TECNOLÓGICO", "CÓDIGO DO PORTFÓLIO"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Colunas Reordenadas1",{{"CÓDIGO CURSO", type text}, {"CARGA HORÁRIA TOTAL", Int64.Type}, {"SUBTIPO CURSOS", type text}, {"CÓDIGO UNIDADE DE ENSINO", type text}, {"CÓDIGO DO PORTFÓLIO", type text}}),
+				    #"Coluna Condicional Adicionada" = Table.AddColumn(#"Tipo Alterado", "CO_MODALIDADE", each if [MODALIDADE ENSINO] = "EDUCAÇÃO PRESENCIAL" then 1 else 2),
+				    #"Coluna Condicional Adicionada1" = Table.AddColumn(#"Coluna Condicional Adicionada", "CO_SUBTIPO", each if [SUBTIPO CURSOS] = "ESPECIALIZAÇÃO (LATO SENSU)" then 1 else if [SUBTIPO CURSOS] = "LICENCIATURA" then 2 else if [SUBTIPO CURSOS] = "TÉCNICO" then 3 else if [SUBTIPO CURSOS] = "TECNOLOGIA" then 4 else if [SUBTIPO CURSOS] = "FORMAÇÃO INICIAL" then 5 else if [SUBTIPO CURSOS] = "BACHARELADO" then 6 else if [SUBTIPO CURSOS] = "FORMAÇÃO CONTINUADA" then 7 else if [SUBTIPO CURSOS] = "MULHERES MIL" then 8 else if [SUBTIPO CURSOS] = "MESTRADO PROFISSIONAL" then 9 else null),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Coluna Condicional Adicionada1",{{"CO_SUBTIPO", type text}, {"CO_MODALIDADE", type text}, {"CO_TIPO_OFERTA_CURSO", type text}, {"CO_CURSO", type text}}),
+				    #"Personalização Adicionada" = Table.AddColumn(#"Coluna Condicional Adicionada1", "CHAVE_CURSO", each 
+				    Text.Combine(
+				        List.RemoveNulls({
+				            if [CÓDIGO UNIDADE DE ENSINO] <> null then Text.From([CÓDIGO UNIDADE DE ENSINO]) else null,
+				            if [CÓDIGO CURSO] <> null then Text.From([CÓDIGO CURSO]) else null,
+				            if [CO_SUBTIPO] <> null then Text.From([CO_SUBTIPO]) else null,
+				            if [CO_MODALIDADE] <> null then Text.From([CO_MODALIDADE]) else null,
+				            if [CO_TIPO_OFERTA_CURSO] <> null then Text.From([CO_TIPO_OFERTA_CURSO]) else null
+				        }),
+				        ""
+				    )
+				),
+				    #"Tipo Alterado2" = Table.TransformColumnTypes(#"Personalização Adicionada",{{"CHAVE_CURSO", type text}}),
+				    #"Colunas Reordenadas" = Table.ReorderColumns(#"Tipo Alterado2",{"CHAVE_CURSO", "CÓDIGO UNIDADE DE ENSINO", "SUBTIPO CURSOS", "CÓDIGO CURSO", "CO_CURSO", "NOME DO CURSO", "CARGA HORÁRIA MÍNIMA", "CARGA HORÁRIA TOTAL", "MODALIDADE ENSINO", "TIPO OFERTA DO CURSO", "CO_TIPO_OFERTA_CURSO", "EIXO TECNOLÓGICO", "CÓDIGO DO PORTFÓLIO", "CO_MODALIDADE", "CO_SUBTIPO"}),
+				    #"Linhas Filtradas" = Table.SelectRows(#"Colunas Reordenadas", each true),
+				    #"Duplicatas Removidas" = Table.Distinct(#"Linhas Filtradas", {"CHAVE_CURSO"}),
+				    #"Texto Aparado" = Table.TransformColumns(#"Duplicatas Removidas",{{"SUBTIPO CURSOS", Text.Trim, type text}, {"NOME DO CURSO", Text.Trim, type text}}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Texto Aparado","CURSO TÉCNICO EM AGROINDÚSTRIA INTEGRADO AO ENSINO MÉDIO NA MODALIDADE DE EDUCAÇÃO DE JOPVENS E ADULTOS-PROEJA","TÉCNICO EM AGROINDÚSTRIA",Replacer.ReplaceText,{"NOME DO CURSO"}),
+				    #"Valor Substituído2" = Table.ReplaceValue(#"Valor Substituído1","CURSO TÉCNICO EM AGROECOLOGIA - MODALIDADE INTEGRADO AO ENSINO MÉDIO","TÉCNICO EM AGROECOLOGIA",Replacer.ReplaceText,{"NOME DO CURSO"}),
+				    #"Valor Substituído3" = Table.ReplaceValue(#"Valor Substituído2","CURSO TÉCNICO EM MANUTENÇÃO E SUPORTE DE INFORMÁTICA-PROEJA","TÉCNICO EM MANUTENÇÃO E SUPORTE DE INFORMÁTICA",Replacer.ReplaceText,{"NOME DO CURSO"}),
+				    #"Valor Substituído4" = Table.ReplaceValue(#"Valor Substituído3","CURSO TÉCNICO EM AGROINDÚSTRIA COM ÊNFASE EM PRODUTOS DE ORIGEM ANIMAL-PROEJA","TÉCNICO EM AGROINDÚSTRIA",Replacer.ReplaceText,{"NOME DO CURSO"}),
+				    #"Valor Substituído5" = Table.ReplaceValue(#"Valor Substituído4","LICENCIATURA EM COMPUTAÇÃO","COMPUTAÇÃO",Replacer.ReplaceText,{"NOME DO CURSO"}),
+				    #"Valor Substituído7" = Table.ReplaceValue(#"Valor Substituído5","MANUTENÇÃO E SUPORTE DE INFORMÁTICA","MANUTENÇÃO E SUPORTE EM INFORMÁTICA",Replacer.ReplaceText,{"NOME DO CURSO"}),
+				    #"Valor Substituído6" = Table.ReplaceValue(#"Valor Substituído7","TECNICO EM AGROPECUÁRIA - HABILITAÇÃO EM AGRICULTURA","TÉCNICO EM AGROPECUÁRIA",Replacer.ReplaceText,{"NOME DO CURSO"}),
+				    #"Valor Substituído8" = Table.ReplaceValue(#"Valor Substituído6","TECNOLOGIA EM SISTEMAS PARA INTERNET","SISTEMAS PARA INTERNET",Replacer.ReplaceText,{"NOME DO CURSO"}),
+				    #"Valor Substituído9" = Table.ReplaceValue(#"Valor Substituído8","TECNOLOGIA EM ESTÉTICA E COSMÉTICA","ESTÉTICA E COSMÉTICA",Replacer.ReplaceText,{"NOME DO CURSO"}),
+				    #"Valor Substituído10" = Table.ReplaceValue(#"Valor Substituído9","CURSO DE FORMAÇÃO PEDAGÓGICA DE PROFESSORES PARA EDUCAÇÃO PROFISSIONAL - EAD","PROGRAMA ESPECIAL DE FORMAÇÃO PEDAGÓGICA DE DOCENTES",Replacer.ReplaceText,{"NOME DO CURSO"}),
+				    #"Valor Substituído11" = Table.ReplaceValue(#"Valor Substituído10","FORMAÇÃO PEDAGÓGICA DE PROFESSORES PARA EDUCAÇÃO PROFISSIONAL - EAD","PROGRAMA ESPECIAL DE FORMAÇÃO PEDAGÓGICA DE DOCENTES",Replacer.ReplaceText,{"NOME DO CURSO"}),
+				    #"Valor Substituído12" = Table.ReplaceValue(#"Valor Substituído11","FORMAÇÃO PEDAGÓGICA DE PROFESSORES PARA EDUCAÇÃO PROFISSIONAL","PROGRAMA ESPECIAL DE FORMAÇÃO PEDAGÓGICA DE DOCENTES",Replacer.ReplaceText,{"NOME DO CURSO"}),
+				    #"Valor Substituído13" = Table.ReplaceValue(#"Valor Substituído12","CURSO DE PROGRAMA ESPECIAL DE FORMAÇÃO PEDAGÓGICA DE DOCENTES","PROGRAMA ESPECIAL DE FORMAÇÃO PEDAGÓGICA DE DOCENTES",Replacer.ReplaceText,{"NOME DO CURSO"}),
+				    #"Valor Substituído14" = Table.ReplaceValue(#"Valor Substituído13","EDUCAÇÃO DO CAMPO - CIÊNCIAS AGRÁRIAS","EDUCAÇÃO DO CAMPO",Replacer.ReplaceText,{"NOME DO CURSO"}),
+				    #"Valor Substituído15" = Table.ReplaceValue(#"Valor Substituído14","LICENCIATURA EM EDUCAÇÃO DO CAMPO - CIÊNCIAS DA NATUREZA","EDUCAÇÃO DO CAMPO",Replacer.ReplaceText,{"NOME DO CURSO"}),
+				    #"Valor Substituído16" = Table.ReplaceValue(#"Valor Substituído15","TECNOLOGIA EM ALIMENTOS","ALIMENTOS",Replacer.ReplaceText,{"NOME DO CURSO"}),
+				    #"Valor Substituído17" = Table.ReplaceValue(#"Valor Substituído16","PÓS COLHEITA DE GRÃOS","TÉCNICO EM PÓS-COLHEITA",Replacer.ReplaceText,{"NOME DO CURSO"}),
+				    #"Valor Substituído18" = Table.ReplaceValue(#"Valor Substituído17","TECNICO EM AGROPECUÁRIA - HABILITAÇÃO EM AGROINDÚSTRIA","TÉCNICO EM AGROPECUÁRIA",Replacer.ReplaceText,{"NOME DO CURSO"}),
+				    #"Valor Substituído19" = Table.ReplaceValue(#"Valor Substituído18","TÉCNICO EM GERÊNCIA EM SAÚDE","TÉCNICO EM GERÊNCIA DE SAÚDE",Replacer.ReplaceText,{"NOME DO CURSO"}),
+				    #"Valor Substituído20" = Table.ReplaceValue(#"Valor Substituído19","TÉCNICO EM AGROPECUÁRIA - HABILITAÇÃO EM ZOOTECNIA","TÉCNICO EM AGROPECUÁRIA",Replacer.ReplaceText,{"NOME DO CURSO"}),
+				    #"Valor Substituído21" = Table.ReplaceValue(#"Valor Substituído20","TECNOLOGIA EM AGRONEGÓCIO","AGRONEGÓCIO",Replacer.ReplaceText,{"NOME DO CURSO"}),
+				    #"Valor Substituído22" = Table.ReplaceValue(#"Valor Substituído21","GESTÃO DO AGRONEGÓCIO","AGRONEGÓCIO",Replacer.ReplaceText,{"NOME DO CURSO"}),
+				    #"Valor Substituído23" = Table.ReplaceValue(#"Valor Substituído22","AGRICULTURA DE PRECISÃO","TÉCNICO EM AGRICULTURA",Replacer.ReplaceText,{"NOME DO CURSO"}),
+				    #"Valor Substituído24" = Table.ReplaceValue(#"Valor Substituído23","BACHARELADO EM QUÍMICA INDUSTRIAL","QUÍMICA",Replacer.ReplaceText,{"NOME DO CURSO"}),
+				    #"Coluna Condicional Adicionada2" = Table.AddColumn(#"Valor Substituído24", "TIPO_CURSO_PNP", each if [SUBTIPO CURSOS] = "FORMAÇÃO INICIAL" then "QUALIFICAÇÃO PROFISSIONAL" else if [SUBTIPO CURSOS] = "FORMAÇÃO CONTINUADA" then "QUALIFICAÇÃO PROFISSIONAL" else [SUBTIPO CURSOS]),
+				    #"Colunas Reordenadas2" = Table.ReorderColumns(#"Coluna Condicional Adicionada2",{"CHAVE_CURSO", "CÓDIGO UNIDADE DE ENSINO", "SUBTIPO CURSOS", "TIPO_CURSO_PNP", "CÓDIGO CURSO", "CO_CURSO", "NOME DO CURSO", "CARGA HORÁRIA MÍNIMA", "CARGA HORÁRIA TOTAL", "MODALIDADE ENSINO", "TIPO OFERTA DO CURSO", "CO_TIPO_OFERTA_CURSO", "EIXO TECNOLÓGICO", "CÓDIGO DO PORTFÓLIO", "CO_MODALIDADE", "CO_SUBTIPO"}),
+				    #"Tipo Alterado3" = Table.TransformColumnTypes(#"Colunas Reordenadas2",{{"TIPO_CURSO_PNP", type text}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Tipo Alterado3","MULHERES MIL","QUALIFICAÇÃO PROFISSIONAL",Replacer.ReplaceText,{"TIPO_CURSO_PNP"}),
+				    #"Linhas Filtradas1" = Table.SelectRows(#"Valor Substituído", each true),
+				
+				    // Passo 2: Adicionar "Técnico em" ao início do nome do curso, se necessário
+				    AjustaNomeCurso = Table.AddColumn(
+				        #"Linhas Filtradas1", 
+				        "NOME DO CURSO AJUSTADO", 
+				        each if Text.Trim([TIPO_CURSO_PNP]) = "TÉCNICO" and not Text.StartsWith([NOME DO CURSO], "TÉCNICO EM", Comparer.OrdinalIgnoreCase) 
+				             then "TÉCNICO EM " & [NOME DO CURSO] 
+				             else [NOME DO CURSO], 
+				        type text
+				    ),
+				
+				    // Passo 1: Referenciar a tabela principal
+				    Origem = AjustaNomeCurso,
+				
+				    // Passo 4: Adicionar uma coluna condicional para fazer o merge baseado no tipo de curso
+				    AdicionarColunaCondicional = Table.AddColumn(
+				        Origem, 
+				        "TabelaMesclada", 
+				        each if [TIPO_CURSO_PNP] = "ESPECIALIZAÇÃO (LATO SENSU)" or [TIPO_CURSO_PNP] = "QUALIFICAÇÃO PROFISSIONAL" or [TIPO_CURSO_PNP] = "MESTRADO PROFISSIONAL" 
+				            then Table.SelectRows(
+				               fec_fech, 
+				                (otherRow) => otherRow[TIPO DE CURSO] = [TIPO_CURSO_PNP]
+				            )
+				            else Table.SelectRows(
+				                fec_fech, 
+				                (otherRow) => otherRow[TIPO DE CURSO] = [TIPO_CURSO_PNP] and 
+				                              Text.Contains(otherRow[CURSO], [NOME DO CURSO AJUSTADO], Comparer.OrdinalIgnoreCase)
+				            )
+				    ),
+				    #"TabelaMesclada Expandido" = Table.ExpandTableColumn(AdicionarColunaCondicional, "TabelaMesclada", {"TIPO DE CURSO", "EIXO TECNOLÓGICO", "CURSO", "FEC", "FECH", "MATRÍCULAS"}, {"TabelaMesclada.TIPO DE CURSO", "TabelaMesclada.EIXO TECNOLÓGICO", "TabelaMesclada.CURSO", "TabelaMesclada.FEC", "TabelaMesclada.FECH", "TabelaMesclada.MATRÍCULAS"}),
+				    #"Tipo Alterado4" = Table.TransformColumnTypes(#"TabelaMesclada Expandido",{{"TabelaMesclada.TIPO DE CURSO", type text}, {"TabelaMesclada.EIXO TECNOLÓGICO", type text}}),
+				    #"Outras Colunas Removidas1" = Table.SelectColumns(#"Tipo Alterado4",{"CHAVE_CURSO", "CÓDIGO UNIDADE DE ENSINO", "SUBTIPO CURSOS", "TIPO_CURSO_PNP", "CÓDIGO CURSO", "CARGA HORÁRIA MÍNIMA", "CARGA HORÁRIA TOTAL", "MODALIDADE ENSINO", "TIPO OFERTA DO CURSO", "CO_TIPO_OFERTA_CURSO", "CO_MODALIDADE", "CO_SUBTIPO", "NOME DO CURSO AJUSTADO", "TabelaMesclada.TIPO DE CURSO", "TabelaMesclada.EIXO TECNOLÓGICO", "TabelaMesclada.CURSO", "TabelaMesclada.FEC", "TabelaMesclada.FECH"}),
+				    #"Tipo Alterado5" = Table.TransformColumnTypes(#"Outras Colunas Removidas1",{{"TabelaMesclada.FEC", type number}, {"TabelaMesclada.FECH", Int64.Type}}),
+				    #"Duplicatas Removidas1" = Table.Distinct(#"Tipo Alterado5", {"CHAVE_CURSO"}),
+				    #"Tipo Alterado6" = Table.TransformColumnTypes(#"Duplicatas Removidas1",{{"CARGA HORÁRIA MÍNIMA", type number}}),
+				    #"Colocar Cada Palavra Em Maiúscula" = Table.TransformColumns(#"Tipo Alterado6",{{"SUBTIPO CURSOS", Text.Proper, type text}, {"TIPO_CURSO_PNP", Text.Proper, type text}, {"MODALIDADE ENSINO", Text.Proper, type text}, {"TIPO OFERTA DO CURSO", Text.Proper, type text}}),
+				    #"Valor Substituído25" = Table.ReplaceValue(#"Colocar Cada Palavra Em Maiúscula"," A "," a ",Replacer.ReplaceText,{"MODALIDADE ENSINO"}),
+				    #"Colocar Cada Palavra Em Maiúscula1" = Table.TransformColumns(#"Valor Substituído25",{{"NOME DO CURSO AJUSTADO", Text.Proper, type text}}),
+				    #"Valor Substituído26" = Table.ReplaceValue(#"Colocar Cada Palavra Em Maiúscula1"," Em "," em ",Replacer.ReplaceText,{"NOME DO CURSO AJUSTADO"}),
+				    #"Valor Substituído27" = Table.ReplaceValue(#"Valor Substituído26"," De "," de ",Replacer.ReplaceText,{"NOME DO CURSO AJUSTADO"}),
+				    #"Valor Substituído28" = Table.ReplaceValue(#"Valor Substituído27"," E "," e ",Replacer.ReplaceText,{"NOME DO CURSO AJUSTADO"}),
+				    #"Valor Substituído29" = Table.ReplaceValue(#"Valor Substituído28"," À "," à ",Replacer.ReplaceText,{"NOME DO CURSO AJUSTADO"}),
+				    #"Valor Substituído30" = Table.ReplaceValue(#"Valor Substituído29"," Para "," para ",Replacer.ReplaceText,{"NOME DO CURSO AJUSTADO"}),
+				    #"Valor Substituído31" = Table.ReplaceValue(#"Valor Substituído30"," Do "," do ",Replacer.ReplaceText,{"NOME DO CURSO AJUSTADO"}),
+				    #"Valor Substituído32" = Table.ReplaceValue(#"Valor Substituído31"," Nas "," nas ",Replacer.ReplaceText,{"NOME DO CURSO AJUSTADO"}),
+				    #"Valor Substituído33" = Table.ReplaceValue(#"Valor Substituído32"," A "," a ",Replacer.ReplaceText,{"NOME DO CURSO AJUSTADO"}),
+				    #"Valor Substituído34" = Table.ReplaceValue(#"Valor Substituído33"," Na "," na ",Replacer.ReplaceText,{"NOME DO CURSO AJUSTADO"}),
+				    #"Valor Substituído35" = Table.ReplaceValue(#"Valor Substituído34"," Os "," os ",Replacer.ReplaceText,{"NOME DO CURSO AJUSTADO"}),
+				    #"Valor Substituído36" = Table.ReplaceValue(#"Valor Substituído35"," Nos "," nos ",Replacer.ReplaceText,{"NOME DO CURSO AJUSTADO"}),
+				    #"Valor Substituído37" = Table.ReplaceValue(#"Valor Substituído36"," Da "," da ",Replacer.ReplaceText,{"NOME DO CURSO AJUSTADO"}),
+				    #"Valor Substituído38" = Table.ReplaceValue(#"Valor Substituído37"," Com "," com ",Replacer.ReplaceText,{"NOME DO CURSO AJUSTADO"}),
+				    #"Valor Substituído39" = Table.ReplaceValue(#"Valor Substituído38"," Ead "," EAD ",Replacer.ReplaceText,{"NOME DO CURSO AJUSTADO"}),
+				    #"Valor Substituído40" = Table.ReplaceValue(#"Valor Substituído39","Pós-Graduação Emeducação Profissional e Tecnológica","Pós-Graduação em Educação Profissional e Tecnológica",Replacer.ReplaceText,{"NOME DO CURSO AJUSTADO"}),
+				    #"Valor Substituído41" = Table.ReplaceValue(#"Valor Substituído40","Curso de Educação de Jovens e Adultos Integrada à Educação Profissional e Tecnológica ? Operador de Computador","Operador de Computador",Replacer.ReplaceText,{"NOME DO CURSO AJUSTADO"}),
+				    #"Valor Substituído42" = Table.ReplaceValue(#"Valor Substituído41","Curso de Educação de Jovens e Adultos Integrada à Educação Profissional e Tecnológica ? Padeiro","Padeiro",Replacer.ReplaceText,{"NOME DO CURSO AJUSTADO"}),
+				    #"Coluna Condicional Adicionada3" = Table.AddColumn(
+				    #"Valor Substituído42",
+				    "Eixo Tecnológico Ajustado", 
+				    each if 
+				        List.AnyTrue(
+				            {
+				                Text.Contains([NOME DO CURSO AJUSTADO], "Ensino"),
+				                Text.Contains([NOME DO CURSO AJUSTADO], "Docência"),
+				                Text.Contains([NOME DO CURSO AJUSTADO], "Escolar"),
+				                Text.Contains([NOME DO CURSO AJUSTADO], "Educação"),
+				                Text.Contains([NOME DO CURSO AJUSTADO], "Práticas Educativas"),
+				                Text.Contains([NOME DO CURSO AJUSTADO], "Metodologias Ativas"),
+				                Text.Contains([NOME DO CURSO AJUSTADO], "Tecnologias Digitais"),
+				                Text.Contains([NOME DO CURSO AJUSTADO], "Ead"),
+				                Text.Contains([NOME DO CURSO AJUSTADO], "Espanhol"),
+				                Text.Contains([NOME DO CURSO AJUSTADO], "Italiana"),
+				                Text.Contains([NOME DO CURSO AJUSTADO], "Professores"),
+				                Text.Contains([NOME DO CURSO AJUSTADO], "Deficiência"),
+				                Text.Contains([NOME DO CURSO AJUSTADO], "Hablando"),
+				                Text.Contains([NOME DO CURSO AJUSTADO], "English"),
+				                Text.Contains([NOME DO CURSO AJUSTADO], "Inglês"),
+				                Text.Contains([NOME DO CURSO AJUSTADO], "Libras"),
+				                Text.Contains([NOME DO CURSO AJUSTADO], "Redação")
+				            }
+				        ) 
+				        then "DESENVOLVIMENTO EDUCACIONAL E SOCIAL"
+				        else [TabelaMesclada.EIXO TECNOLÓGICO]
+				)
+				in
+				    #"Coluna Condicional Adicionada3"
+				```
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

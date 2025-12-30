@@ -1,0 +1,61 @@
+table microdados_PNP_matriculas_IFFarroupilha_filtrado
+	lineageTag: 104b8196-4b93-48ec-8b80-a346e038cfe8
+
+	column Ano
+		dataType: int64
+		formatString: 0
+		lineageTag: bf2da81e-f252-4d96-abf2-228c2f7a2ab9
+		summarizeBy: sum
+		sourceColumn: Ano
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Código da Matricula'
+		dataType: string
+		lineageTag: 3e722baa-04f7-4b8f-b532-f12c77580463
+		summarizeBy: none
+		sourceColumn: Código da Matricula
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mês De Ocorrência da Situação'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d5df2bec-49fd-4606-88ba-d3de86947d2e
+		summarizeBy: none
+		sourceColumn: Mês De Ocorrência da Situação
+
+		variation Variation
+			isDefault
+			relationship: 0c88cc90-cfb8-4047-b249-b3ea15b8c3bd
+			defaultHierarchy: LocalDateTable_342596e2-f9bd-4bf2-b2ac-151c1b8f5489.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Situação de Matrícula'
+		dataType: string
+		lineageTag: c3371290-c636-4c30-b18b-bd7f8198e053
+		summarizeBy: none
+		sourceColumn: Situação de Matrícula
+
+		annotation SummarizationSetBy = Automatic
+
+	partition microdados_PNP_matriculas_IFFarroupilha_filtrado = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("H:\Drives compartilhados\PI IFFar\PNP\Microdados PNP\arquivos_matriculas_2017a2023\microdados_matriculas_IFFarroupilha_filtrado.csv"),[Delimiter=",", Columns=56, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Ano", Int64.Type}, {"Carga Horaria", Int64.Type}, {"Carga Horaria Mínima", Int64.Type}, {"Categoria da Situação", type text}, {"Co Inst", Int64.Type}, {"Cod Unidade", Int64.Type}, {"Cor / Raça", type text}, {"Código da Matricula", Int64.Type}, {"Código da Unidade de Ensino - SISTEC", Int64.Type}, {"Código do Ciclo Matricula", Int64.Type}, {"Código do Município com DV", Int64.Type}, {"Data de Fim Previsto do Ciclo", type date}, {"Data de Inicio do Ciclo", type date}, {"Data de Ocorrencia da Matricula", type date}, {"Eixo Tecnológico", type text}, {"Faixa Etária", type text}, {"Fator Esforço Curso", type number}, {"Fonte de Financiamento", type text}, {"Idade", Int64.Type}, {"Instituição", type text}, {"Matrícula Atendida", type text}, {"Modalidade de Ensino", type text}, {"Município", type text}, {"Mês De Ocorrência da Situação", type date}, {"Nome de Curso", type text}, {"Número de registros", Int64.Type}, {"Região", type text}, {"Renda Familiar", type text}, {"Sexo", type text}, {"Situação de Matrícula", type text}, {"Subeixo Tecnológico", type text}, {"Tipo de Curso", type text}, {"Tipo de Oferta", type text}, {"Total de Inscritos", Int64.Type}, {"Turno", type text}, {"UF", type text}, {"Unidade de Ensino", type text}, {"Vagas Extraordinárias AC", Int64.Type}, {"Vagas Extraordinárias l1", Int64.Type}, {"Vagas Extraordinárias l10", Int64.Type}, {"Vagas Extraordinárias l13", Int64.Type}, {"Vagas Extraordinárias l14", Int64.Type}, {"Vagas Extraordinárias l2", Int64.Type}, {"Vagas Extraordinárias l5", Int64.Type}, {"Vagas Extraordinárias l6", Int64.Type}, {"Vagas Extraordinárias l9", Int64.Type}, {"Vagas Regulares AC", Int64.Type}, {"Vagas Regulares l1", Int64.Type}, {"Vagas Regulares l10", Int64.Type}, {"Vagas Regulares l13", Int64.Type}, {"Vagas Regulares l14", Int64.Type}, {"Vagas Regulares l2", Int64.Type}, {"Vagas Regulares l5", Int64.Type}, {"Vagas Regulares l6", Int64.Type}, {"Vagas Regulares l9", Int64.Type}, {"ANO", Int64.Type}}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Tipo Alterado",{{"ANO", "ANO.1"}}),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(#"Colunas Renomeadas",{"Ano", "Código da Matricula", "Mês De Ocorrência da Situação", "Situação de Matrícula"}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Outras Colunas Removidas",{{"Código da Matricula", type text}})
+				in
+				    #"Tipo Alterado1"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

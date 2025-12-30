@@ -1,0 +1,70 @@
+table dimEstudante
+	lineageTag: e862ba89-1e2f-430b-a022-b50c68ca181d
+
+	column NO_ALUNO
+		dataType: string
+		lineageTag: cbf6bb8e-5534-4b51-b4a1-dbef555b9407
+		summarizeBy: none
+		sourceColumn: NO_ALUNO
+
+		annotation SummarizationSetBy = Automatic
+
+	column NO_MAE_ALUNO
+		dataType: string
+		lineageTag: 75fd7621-3399-43e1-8465-fb537fd13bad
+		summarizeBy: none
+		sourceColumn: NO_MAE_ALUNO
+
+		annotation SummarizationSetBy = Automatic
+
+	column SG_SEXO
+		dataType: string
+		lineageTag: 6e242b98-a368-4e1e-9d44-7be8dcccc8e4
+		summarizeBy: none
+		sourceColumn: SG_SEXO
+
+		annotation SummarizationSetBy = Automatic
+
+	column DT_DATA_NASCIMENTO
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 26d3abd4-f0dd-4ee6-a8fa-0cdf7f5310ed
+		summarizeBy: none
+		sourceColumn: DT_DATA_NASCIMENTO
+
+		variation Variation
+			isDefault
+			relationship: b5f55f87-6e49-4a36-8c36-858a8b8947da
+			defaultHierarchy: LocalDateTable_43d78e67-cda7-4574-9a01-ed8d432c8983.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column NU_CPF
+		dataType: string
+		lineageTag: f17fd24b-25c9-4c68-98f2-f763cb3ba337
+		summarizeBy: none
+		sourceColumn: NU_CPF
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dimEstudante = m
+		mode: import
+		source =
+				let
+				    Fonte = Folder.Files("H:\Drives compartilhados\PI IFFar\SISTEC\Extração de Dados SISTEC\Extração 2025\11novembro\1912\matriculas"),
+				    #"Arquivos Ocultos Filtrados1" = Table.SelectRows(Fonte, each [Attributes]?[Hidden]? <> true),
+				    #"Invocar Função Personalizada1" = Table.AddColumn(#"Arquivos Ocultos Filtrados1", "Transformar Arquivo (2)", each #"Transformar Arquivo (2)"([Content])),
+				    #"Colunas Renomeadas1" = Table.RenameColumns(#"Invocar Função Personalizada1", {"Name", "Nome da Origem"}),
+				    #"Outras Colunas Removidas1" = Table.SelectColumns(#"Colunas Renomeadas1", {"Nome da Origem", "Transformar Arquivo (2)"}),
+				    #"Coluna de Tabela Expandida1" = Table.ExpandTableColumn(#"Outras Colunas Removidas1", "Transformar Arquivo (2)", Table.ColumnNames(#"Transformar Arquivo (2)"(#"Arquivo de Amostra (2)"))),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(#"Coluna de Tabela Expandida1",{"NO_ALUNO", "NO_MAE_ALUNO", "SG_SEXO", "DT_DATA_NASCIMENTO", "NU_CPF"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Outras Colunas Removidas",{{"DT_DATA_NASCIMENTO", type datetime}}),
+				    #"Duplicatas Removidas" = Table.Distinct(#"Tipo Alterado", {"NU_CPF"}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Duplicatas Removidas",{{"NU_CPF", type text}})
+				in
+				    #"Tipo Alterado1"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,89 @@
+table _CategoriasMatriculas
+	lineageTag: aeec8187-d33d-4db4-b3c5-9f0cfa4719bb
+
+	measure _ValoresPorCategoria =
+			
+			SWITCH(
+			    TRUE(),
+			    SELECTEDVALUE(_CategoriasMatriculas[CategoriasMatriculas]) = "Abandonos", [Matriculas_abandonos],
+			    SELECTEDVALUE(_CategoriasMatriculas[CategoriasMatriculas]) = "Concluídas", [Matriculas_concluidas],
+			    SELECTEDVALUE(_CategoriasMatriculas[CategoriasMatriculas]) = "Integralizadas", [Matriculas_integralizadas],
+			    SELECTEDVALUE(_CategoriasMatriculas[CategoriasMatriculas]) = "Transferências", [Matriculas_transf_externa] + [Matriculas_transf_interna],
+			     SELECTEDVALUE(_CategoriasMatriculas[CategoriasMatriculas]) = "❌", [_EvasaoTotal],
+			    SELECTEDVALUE(_CategoriasMatriculas[CategoriasMatriculas]) = "Desligamentos", [Matriculas_desligadas],
+			    SELECTEDVALUE(_CategoriasMatriculas[CategoriasMatriculas]) = "📚", [Matriculas_emCurso],
+			    SELECTEDVALUE(_CategoriasMatriculas[CategoriasMatriculas]) = "Total de Matrículas", [Matrículas],
+			    BLANK()
+			)
+		formatString: 0
+		lineageTag: 1af5e4fd-155e-4969-8150-948743f7a29d
+
+	measure _EvasaoTotal = [Matriculas_abandonos]+[Matriculas_desligadas]+[Matriculas_transf_externa]+[Matriculas_transf_interna]
+		formatString: 0
+		lineageTag: e42614ee-0d6a-4229-920e-02d27b5c3b35
+
+	measure _CorPorCategoria =
+			
+			SWITCH(
+			    TRUE(),
+			    SELECTEDVALUE(_CategoriasMatriculas[CategoriasMatriculas]) = "Total de Matrículas", "#f7f2dc" -- Cor dourada para Total de Matrículas
+			)
+		lineageTag: 880c1842-715c-45bc-9fbe-c17024ee10e0
+
+	measure _CorTextoNegrito =
+			
+			SWITCH(
+			    TRUE(),
+			    SELECTEDVALUE(_CategoriasMatriculas[CategoriasMatriculas]) = "Matrículas", "#003049" -- Cor preta para destacar)
+			)
+		lineageTag: 9bc83281-13c1-4ab9-93f8-d6d79775d4e0
+
+	column CategoriasMatriculas
+		lineageTag: 4fda75ef-5ef1-44c8-9e10-c155c2f32434
+		summarizeBy: none
+		sourceColumn: [Categoria]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Situação da Matrícula'
+		lineageTag: 236708de-4d96-4ebd-977e-a347affd6780
+		summarizeBy: none
+		sourceColumn: [Categoria Geral]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordem
+		isHidden
+		formatString: 0
+		lineageTag: 19eb3819-38d4-4e2a-bcd3-fb222fa0a655
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Ordem]
+		sortByColumn: CategoriasMatriculas
+
+		annotation SummarizationSetBy = User
+
+	partition _CategoriasMatriculas = calculated
+		mode: import
+		source = ```
+				
+				DATATABLE(
+				    "Categoria", STRING,
+				    "Categoria Geral", STRING,
+				     "Ordem", INTEGER,
+				    {
+				        {"Total de Matrículas", "Ano PNP",0},
+				        //{"Transferências", "Evasões",1},
+				        //{"Desligamentos", "Evasões",2},
+				        //{"Abandonos", "Evasões",3},
+				        {"❌", "Evasões",3},
+				        {"📚", "Em Curso",4},
+				        {"Concluídas", "Concluintes",5},
+				        {"Integralizadas", "Concluintes",6}
+				        
+				    }
+				)
+				```
+
+	annotation PBI_Id = d30163a562f64e5493b57fd1f07c81ef
+

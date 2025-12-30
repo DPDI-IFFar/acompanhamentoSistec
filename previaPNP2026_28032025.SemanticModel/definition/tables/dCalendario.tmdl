@@ -1,0 +1,100 @@
+table dCalendario
+	lineageTag: f1b0eb1f-5548-4ac4-b636-d4153f7798ce
+
+	column Data
+		dataType: string
+		lineageTag: d2617661-458f-4f15-a0ce-c78ffa47f243
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ano
+		dataType: string
+		lineageTag: 436f871a-4cb1-492e-973f-ddfc25ad59de
+		summarizeBy: none
+		sourceColumn: Ano
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mês
+		dataType: string
+		lineageTag: 13c55fd8-1d2b-48db-b630-ba2309634430
+		summarizeBy: none
+		sourceColumn: Mês
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dia
+		dataType: string
+		lineageTag: 037abec3-f3a7-43c5-ba4d-93ae45756206
+		summarizeBy: none
+		sourceColumn: Dia
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nome do Mês'
+		dataType: string
+		lineageTag: d76a2619-8db1-4ddc-a552-eeb41ff90bd3
+		summarizeBy: none
+		sourceColumn: Nome do Mês
+
+		annotation SummarizationSetBy = Automatic
+
+	column Trimestre
+		dataType: string
+		lineageTag: 7c2c3b4c-9d1f-4caf-8fad-c0d5f2083a0b
+		summarizeBy: none
+		sourceColumn: Trimestre
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dia da Semana'
+		dataType: string
+		lineageTag: e5c8efe1-537a-4d05-9270-7749f57ac258
+		summarizeBy: none
+		sourceColumn: Dia da Semana
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ano-Mês
+		dataType: string
+		lineageTag: 89cab632-981b-4112-bd6c-d121ef17bb16
+		summarizeBy: none
+		sourceColumn: Ano-Mês
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCalendario = m
+		mode: import
+		source = ```
+				let
+				    // Obter datas mínima e máxima da tabela fMatriculas
+				    DataMinima = Date.From(List.Min(dimCiclo[#"DATA INÍCIO DO CURSO"])),
+				    DataMaxima = Date.From(List.Max(dimCiclo[#"DATA FIM PREVISTO DO CURSO"])),
+				    
+				    // Calcular o número de dias no intervalo
+				    Dias = Duration.Days(DataMaxima - DataMinima) + 1,
+				    
+				    // Gerar a lista de datas
+				    ListaDeDatas = List.Dates(DataMinima, Dias, #duration(1, 0, 0, 0)),
+				    
+				    // Criar a tabela de calendário
+				    TabelaCalendario = Table.FromList(ListaDeDatas, Splitter.SplitByNothing(), {"Data"}),
+				    
+				    // Adicionar colunas personalizadas
+				    TabelaFinal = Table.AddColumn(TabelaCalendario, "Ano", each Date.Year([Data])),
+				    TabelaFinal2 = Table.AddColumn(TabelaFinal, "Mês", each Date.Month([Data])),
+				    TabelaFinal3 = Table.AddColumn(TabelaFinal2, "Dia", each Date.Day([Data])),
+				    TabelaFinal4 = Table.AddColumn(TabelaFinal3, "Nome do Mês", each Date.ToText([Data], "MMMM")),
+				    TabelaFinal5 = Table.AddColumn(TabelaFinal4, "Trimestre", each "Q" & Text.From(Date.QuarterOfYear([Data]))),
+				    TabelaFinal6 = Table.AddColumn(TabelaFinal5, "Dia da Semana", each Date.DayOfWeekName([Data])),
+				    TabelaFinal7 = Table.AddColumn(TabelaFinal6, "Ano-Mês", each Text.From(Date.Year([Data])) & "-" & Text.PadStart(Text.From(Date.Month([Data])), 2, "0"))
+				in
+				    TabelaFinal7
+				```
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

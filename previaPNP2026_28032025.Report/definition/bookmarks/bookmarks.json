@@ -1,0 +1,21 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmarksMetadata/1.0.0/schema.json",
+  "items": [
+    {
+      "name": "cf555c4459b14c65bc38",
+      "displayName": "FIC Matriculas",
+      "children": [
+        "fb61ff1e27635e925595",
+        "6694a9ddd6ec6940e769"
+      ]
+    },
+    {
+      "name": "cdb182356f91382cf687",
+      "displayName": "FIC Eficiência",
+      "children": [
+        "70edaf5da10cf947953d",
+        "4a3012211339a7c185ad"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,194 @@
+table dimCiclo
+	lineageTag: ced85472-768a-45da-b7d0-b62d474a6218
+
+	column 'CÓDIGO CICLO DE MATRÍCULA'
+		dataType: string
+		lineageTag: e6b625ba-941a-4c6a-ba02-fb73b176d464
+		summarizeBy: none
+		sourceColumn: CÓDIGO CICLO DE MATRÍCULA
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'CICLO DE MATRÍCULA'
+		dataType: string
+		lineageTag: 9d3405b4-36ed-4e46-ba56-80b995e6d0d0
+		summarizeBy: none
+		sourceColumn: CICLO DE MATRÍCULA
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'CARGA HORÁRIA TOTAL'
+		dataType: int64
+		formatString: 0
+		lineageTag: 87625a7a-f902-4b64-acc7-f858847c2fc6
+		summarizeBy: sum
+		sourceColumn: CARGA HORÁRIA TOTAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DATA INÍCIO DO CURSO'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 95d32d16-d89e-4b57-b06c-c798ba16012b
+		summarizeBy: none
+		sourceColumn: DATA INÍCIO DO CURSO
+
+		variation Variation
+			isDefault
+			relationship: 87542aec-4e33-4244-aacd-4b8ae4ed5646
+			defaultHierarchy: LocalDateTable_4734c1d9-36a2-48b9-8ea1-d3f3ea4904d2.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DATA FIM PREVISTO DO CURSO'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e339f55f-c860-4dff-a149-23b4fb79a3d5
+		summarizeBy: none
+		sourceColumn: DATA FIM PREVISTO DO CURSO
+
+		variation Variation
+			isDefault
+			relationship: e1edf9e9-6c8e-4417-9832-cbaeb3d26cf5
+			defaultHierarchy: LocalDateTable_fbdcf5ea-5c40-4bf0-a88c-21a8cc4be3e8.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'STATUS DO CICLO DE MATRÍCULA'
+		dataType: string
+		lineageTag: 328ed3c5-4696-456b-80a9-7d3f3134b3da
+		summarizeBy: none
+		sourceColumn: STATUS DO CICLO DE MATRÍCULA
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SITUAÇÃO DO CICLO '
+		dataType: string
+		lineageTag: af33c90a-8b37-47d1-b312-16d1fdc56eca
+		summarizeBy: none
+		sourceColumn: "SITUAÇÃO DO CICLO "
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'TIPO PROGRAMA DO CURSO'
+		dataType: string
+		lineageTag: 58c2064c-e99c-4003-850d-7ef4b3f22131
+		summarizeBy: none
+		sourceColumn: TIPO PROGRAMA DO CURSO
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'CÓDIGO UNIDADE DE ENSINO'
+		dataType: string
+		lineageTag: 0846d613-b6fe-4efb-9e41-7fa70c12e5e3
+		summarizeBy: none
+		sourceColumn: CÓDIGO UNIDADE DE ENSINO
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SUBTIPO CURSOS'
+		dataType: string
+		lineageTag: 08002d7b-ac30-48fa-a8fe-8a140d083a09
+		summarizeBy: none
+		sourceColumn: SUBTIPO CURSOS
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'CÓDIGO CURSO'
+		dataType: string
+		lineageTag: 025ea5bc-3091-4428-8439-5633b41a0f62
+		summarizeBy: none
+		sourceColumn: CÓDIGO CURSO
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MODALIDADE ENSINO'
+		dataType: string
+		lineageTag: 8b604e8f-de22-49d8-b277-0f53c7d84be2
+		summarizeBy: none
+		sourceColumn: MODALIDADE ENSINO
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'TIPO OFERTA DO CURSO'
+		dataType: string
+		lineageTag: 158b45be-ffbd-41f2-bf70-28f281c0ea85
+		summarizeBy: none
+		sourceColumn: TIPO OFERTA DO CURSO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CO_MODALIDADE
+		dataType: string
+		lineageTag: 9a3ed7a2-5f7a-41f0-ab8e-0ca923a7f2ff
+		summarizeBy: none
+		sourceColumn: CO_MODALIDADE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CO_SUBTIPO
+		dataType: string
+		lineageTag: c72a9e4c-74ca-4116-aafb-3c315614049b
+		summarizeBy: none
+		sourceColumn: CO_SUBTIPO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CO_TIPO_OFERTA_CURSO
+		dataType: string
+		lineageTag: 05d43ecc-a8b3-4160-a05c-fc2a5033a9d7
+		summarizeBy: none
+		sourceColumn: CO_TIPO_OFERTA_CURSO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHAVE_CURSO
+		dataType: string
+		lineageTag: a762a9d1-5193-4464-acbb-1cdfd2c9f2ec
+		summarizeBy: none
+		sourceColumn: CHAVE_CURSO
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dimCiclo = m
+		mode: import
+		source = ```
+				let
+				    Fonte = Folder.Files("H:\Drives compartilhados\PI IFFar\SISTEC\Extração de Dados SISTEC\Extração 2025\11novembro\1912\ciclos"),
+				    #"Arquivos Ocultos Filtrados1" = Table.SelectRows(Fonte, each [Attributes]?[Hidden]? <> true),
+				    #"Invocar Função Personalizada1" = Table.AddColumn(#"Arquivos Ocultos Filtrados1", "Transformar Arquivo", each #"Transformar Arquivo"([Content])),
+				    #"Colunas Renomeadas1" = Table.RenameColumns(#"Invocar Função Personalizada1", {"Name", "Nome da Origem"}),
+				    #"Outras Colunas Removidas1" = Table.SelectColumns(#"Colunas Renomeadas1", {"Nome da Origem", "Transformar Arquivo"}),
+				    #"Coluna de Tabela Expandida1" = Table.ExpandTableColumn(#"Outras Colunas Removidas1", "Transformar Arquivo", Table.ColumnNames(#"Transformar Arquivo"(#"Arquivo de Amostra"))),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(#"Coluna de Tabela Expandida1",{"CÓDIGO UNIDADE DE ENSINO", "SUBTIPO CURSOS", "CÓDIGO CURSO", "CÓDIGO CICLO DE MATRÍCULA", "CICLO DE MATRÍCULA", "CARGA HORÁRIA TOTAL", "DATA INÍCIO DO CURSO", "DATA FIM PREVISTO DO CURSO", "MODALIDADE ENSINO", "STATUS DO CICLO DE MATRÍCULA", "SITUAÇÃO DO CICLO ", "TIPO OFERTA DO CURSO", "TIPO PROGRAMA DO CURSO"}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Outras Colunas Removidas",{{"CÓDIGO UNIDADE DE ENSINO", type text}}),
+				    #"Linhas Filtradas" = Table.SelectRows(#"Tipo Alterado1", each true),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Linhas Filtradas",{{"CÓDIGO CICLO DE MATRÍCULA", type text}}),
+				     #"Coluna Condicional Adicionada" = Table.AddColumn(#"Tipo Alterado", "CO_MODALIDADE", each if [MODALIDADE ENSINO] = "EDUCAÇÃO PRESENCIAL" then 1 else 2),
+				    #"Coluna Condicional Adicionada1" = Table.AddColumn(#"Coluna Condicional Adicionada", "CO_SUBTIPO", each if [SUBTIPO CURSOS] = "ESPECIALIZAÇÃO (LATO SENSU)" then 1 else if [SUBTIPO CURSOS] = "LICENCIATURA" then 2 else if [SUBTIPO CURSOS] = "TÉCNICO" then 3 else if [SUBTIPO CURSOS] = "TECNOLOGIA" then 4 else if [SUBTIPO CURSOS] = "FORMAÇÃO INICIAL" then 5 else if [SUBTIPO CURSOS] = "BACHARELADO" then 6 else if [SUBTIPO CURSOS] = "FORMAÇÃO CONTINUADA" then 7 else if [SUBTIPO CURSOS] = "MULHERES MIL" then 8 else if [SUBTIPO CURSOS] = "MESTRADO PROFISSIONAL" then 9 else null),
+				    Personalizar1 = Table.AddColumn(#"Coluna Condicional Adicionada1", "CO_TIPO_OFERTA_CURSO", each if [TIPO OFERTA DO CURSO] = "INTEGRADO" then 1 else if [TIPO OFERTA DO CURSO] = "CONCOMITANTE" then 2 else if [TIPO OFERTA DO CURSO] = "SUBSEQUENTE" then 3 else null),
+				    #"Tipo Alterado2" = Table.TransformColumnTypes(Personalizar1,{{"CO_SUBTIPO", type text}, {"CO_MODALIDADE", type text}, {"CO_TIPO_OFERTA_CURSO", type text}, {"CÓDIGO CURSO", type text}}),
+				    #"Personalização Adicionada" = Table.AddColumn(Personalizar1, "CHAVE_CURSO", each 
+				    Text.Combine(
+				        List.RemoveNulls({
+				            if [CÓDIGO UNIDADE DE ENSINO] <> null then Text.From([CÓDIGO UNIDADE DE ENSINO]) else null,
+				            if [CÓDIGO CURSO] <> null then Text.From([CÓDIGO CURSO]) else null,
+				            if [CO_SUBTIPO] <> null then Text.From([CO_SUBTIPO]) else null,
+				            if [CO_MODALIDADE] <> null then Text.From([CO_MODALIDADE]) else null,
+				            if [CO_TIPO_OFERTA_CURSO] <> null then Text.From([CO_TIPO_OFERTA_CURSO]) else null
+				        }),
+				        ""
+				    )
+				),
+				    #"Tipo Alterado3" = Table.TransformColumnTypes(#"Personalização Adicionada",{{"CHAVE_CURSO", type text}, {"DATA INÍCIO DO CURSO", type datetime}, {"DATA FIM PREVISTO DO CURSO", type datetime}, {"CARGA HORÁRIA TOTAL", Int64.Type}}),
+				    #"Colocar Cada Palavra Em Maiúscula" = Table.TransformColumns(#"Tipo Alterado3",{{"SUBTIPO CURSOS", Text.Proper, type text}, {"MODALIDADE ENSINO", Text.Proper, type text}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Colocar Cada Palavra Em Maiúscula"," A "," a ",Replacer.ReplaceText,{"MODALIDADE ENSINO"}),
+				    #"Colocar Cada Palavra Em Maiúscula1" = Table.TransformColumns(#"Valor Substituído",{{"TIPO OFERTA DO CURSO", Text.Proper, type text}})
+				in
+				    #"Colocar Cada Palavra Em Maiúscula1"
+				```
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
